@@ -12,7 +12,7 @@ Claimed improvements to bounds listed on https://bigospeedrun.com. They aren't L
 | Unit-distance obstruction, selected edges | 29 (6×5 grid minus one edge) | 32 (8×4) | Rohan Arun; OpenAI power-saving paper @ fd4aeeb2 | `unit-distance-grid/` (proof draft + check_grid.py, check_29.py; same imported lemmas) |
 | Heilbronn triangle problem (eta) | 1/39,569,962 (~2.527e-8) | ~1.98e-8 | Blinov, littleBro/heilbronn-triangle-bounds PR #13 @ e29a291 | `heilbronn/` (smaller 3-AP-free packing + verify scripts) |
 | Subset Sum threshold T | 0.4875739537 | 0.4875755 | Jennifer Voitle, jv1000/subset-sum @ 38e5335 | `subset-sum/` (tightened slack constants + certify scripts) |
-| Contingency tables (FPRAS repair coefficient) | 20,000·d^17 | 80,000·d^17 | Upstream Math115 PhysicalRepairRefinement development | `contingency-tables/` (Lean refinement + chk.py) |
+| Contingency tables (FPRAS repair coefficient) | 12,062·d^17 (20,000·d^17 without the retuned scales) | 80,000·d^17 | Upstream Math115 PhysicalRepairRefinement development | `contingency-tables/` (Lean refinement + chk.py) |
 | Directed SSSP gap-fill rows | e.g. n log^{15/8} n at m <= n log^{7/8} n; n log^3 n at m <= n log^2 n; n^{3/2} log n at m <= n^{3/2} | n log^2 n / n^2 / n^2 (Lean Verified) | darkhipo/sssp-nlogn @ 1129aca | `directed-sssp/` (Lean, builds with no sorry) |
 
 ## Caveats
