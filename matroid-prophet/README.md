@@ -31,6 +31,19 @@ more) needs a new structural argument in the fixed-vector analysis of OpenAI/She
 
 Gain split: items 1+3 give about +0.008 %, item 2 gives about +0.024 %.
 
+## Final push (Nov 20): Variant A is at its ceiling; Variant B goes further
+
+- **Variant A (recommended to submit), algorithm unchanged:** C = 5.1165809143775·10⁻¹⁰.
+  A float optimum over all analysis constants gives 5.1165811·10⁻¹⁰, so this certificate
+  sits at the ceiling of the same-algorithm chain.
+- **Variant B (optional, larger claim surface):** C = 5.1179354903163·10⁻¹⁰, which is
+  +0.059 % over darkhipo. It also changes three mask rates of the algorithm:
+  ρ = 745/2048, h = 1545/2048, t = 373/2²², with κ, θ, L unchanged. The seed budget
+  becomes 67|E|+31 bits instead of 47|E|+27. All scalar conditions (3)–(4) pass exactly. The risk:
+  the structural argument is written for symbolic ρ, h, t, but nobody has re-checked
+  it at other values. darkhipo declined a similar κ change for that reason.
+  Run `python3 certify.py --variant-b --fraction`. Output: `certify_output_variant_b.txt`.
+
 ## Checking
 
 `python3 certify.py --fraction` (stdlib only, under a second). It first reproduces

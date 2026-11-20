@@ -83,10 +83,19 @@ def selftest():
 
 if __name__ == "__main__":
     ok, Cdark = selftest()
-    # shipped new parameters
-    mu, nu, v = Q(6705, 512), Q(1801, 128), Q(1, 622)
+    if "--variant-b" in sys.argv:
+        # Variant B: also re-tunes the algorithm's mask rates (kappa, theta, L unchanged).
+        # Seed budget becomes 67|E|+31 fair bits (rho, h: 11 bits; t: 22 bits).
+        rho, h, t = Q(745, 2048), Q(1545, 2048), Q(373, 2**22)
+        p = rho + (1-rho)*t
+        mu, nu, v = Q(6717, 512), Q(7212, 512), Q(1, 625)
+        print("VARIANT B: rho=%s h=%s t=%s" % (rho, h, t))
+    else:
+        # Variant A: algorithm identical to the incumbent.
+        mu, nu, v = Q(6705, 512), Q(1801, 128), Q(1, 622)
+        print("VARIANT A: algorithm constants unchanged")
     # tight rational q0 > p^(-1/4): search
-    q0 = Q(12878, 10000)
+    q0 = Q(12800, 10000)
     while not (q0**4 * p > 1): q0 += Q(1, 10000)
     # minimal a, b: compute via bisection on rationals with 12 digits
     def min_rat(pred, lo, hi, digits=12):
