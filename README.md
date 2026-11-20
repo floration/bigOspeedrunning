@@ -8,7 +8,7 @@ Claimed improvements to bounds listed on https://bigospeedrun.com. They aren't L
 | Van der Waerden lower bound | c = 1249/10000 | 1/9 | DaysSky, commit 987c96c | `van-der-waerden/` (parameter inequalities + sp_check.py) |
 | Catalan's constant, irrationality measure | mu(G) <= 269.787 | 270 | S. Litsey, slitsey/catalan-irrationality-measure @ 3797a70c | `catalan/` (Lean patch, not built yet) |
 | One-sample matroid prophet inequality | C = 5.11658e-10 (Variant B: 5.11794e-10) | 5.11494e-10 | Chen; darkhipo | `matroid-prophet/` (exact-rational `certify.py`, `--variant-b`) |
-| Sidorenko nondirect residual constant | C <= 45 | 189 | rohanarun/sidorenko-template-refinements @ 5ca68cb | `sidorenko/` (new rank lemma, exact-rational audit) |
+| Sidorenko nondirect residual constant | C <= 43 | 189 | rohanarun/sidorenko-template-refinements @ 5ca68cb | `sidorenko/` (new rank lemma, exact-rational audit) |
 | Unit-distance obstruction, selected edges | 29 (6×5 grid minus one edge) | 32 (8×4) | Rohan Arun; OpenAI power-saving paper @ fd4aeeb2 | `unit-distance-grid/` (proof draft + check_grid.py, check_29.py; same imported lemmas) |
 | Heilbronn triangle problem (eta) | 1/40,251,724 (~2.484e-8) | ~1.98e-8 | Blinov, littleBro/heilbronn-triangle-bounds PR #13 @ e29a291 | `heilbronn/` (smaller 3-AP-free packing + verify scripts) |
 | Subset Sum threshold T | 0.4875739649 | 0.4875755 | Jennifer Voitle, jv1000/subset-sum @ 38e5335 | `subset-sum/` (tightened slack constants + certify scripts) |
