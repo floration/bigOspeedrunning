@@ -27,6 +27,14 @@ So kappa -> (1 - s*)/(2 - s*), where s* is the root of the moment inequality.
 Edits needed: main.tex lines 184, 477-481; appendices/movement.tex line 31; finite-unit.tex line 207 (h = log(36/r)*2/2597)
 and rerun checks/probes/finite_certificate.cpp with the new s0 (it is hard-coded there).
 
+## Final push (kappa = 2/2599 = 1/1299.5)
+- s0 = 1 - 5/6491 (= 1 - 1/1298.2, just above s* = 1 - 1/1298.1445). Interval lower bound of target - paid: +0.00513
+  (check_moment_interval.py: correctly rounded 60-digit Decimal ln/exp with ulp slack on every step).
+- u0 = 1 - 2/2597. u0 - z = 8.90e-8 > d^3 = 4.57e-10, so t = z + d^3 < u0.
+- g < 1/(2-u0) = 2597/2599. Bound: O(n log^{2597/2599} n), kappa = 2/2599 = 1/1299.5.
+- s0 = 1 - 10/12981 fails (margin -0.0041), so ~1/1299.14 is the hard ceiling of this finite unit.
+- Same edit locations as above; finite-unit.tex h becomes log(36/r)*5/6491.
+
 ## Caveats
 - This only inherits the paper's proof. That proof is AI-assisted, unreviewed, and "Claimed" on the board; if it is wrong, so is this.
 - I did not rerun the C++ probes (Windows-guarded); the moment check here is high-precision decimal, not directed-rounding rational.

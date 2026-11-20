@@ -4,7 +4,7 @@ Claimed improvements to bounds listed on https://bigospeedrun.com. They aren't L
 
 | Problem | New bound | Previous listed bound | Builds on | Evidence |
 |---|---|---|---|---|
-| Binary polynomial multiplication over F2 | kappa = 1/1300 | 1/1302 | Csizmadia, arpcs/finite-field-polynomial-multiplication v0.2.1 | `binary-polymul/` (100-digit moment check) |
+| Binary polynomial multiplication over F2 | kappa = 2/2599 (1/1299.5) | 1/1302 | Csizmadia, arpcs/finite-field-polynomial-multiplication v0.2.1 | `binary-polymul/` (moment checks, incl. interval check) |
 | Van der Waerden lower bound | c = 31/250 | 1/9 | DaysSky, commit 987c96c | `van-der-waerden/` (parameter inequalities) |
 | Catalan's constant, irrationality measure | mu(G) <= 269.787 | 270 | S. Litsey, slitsey/catalan-irrationality-measure @ 3797a70c | `catalan/` (Lean patch, not built yet) |
 | One-sample matroid prophet inequality | C = 5.11658e-10 | 5.11494e-10 | Chen; darkhipo | `matroid-prophet/` (exact-rational `certify.py`, PASS) |
