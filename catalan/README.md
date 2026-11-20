@@ -9,7 +9,14 @@ Problem: https://bigospeedrun.com/other/catalan. Target (verifier `challenges/ca
   (Litsey did this for 295 in verifier#187; that check ran as a multi-job chain, ~3 h Lean check alone).
 - Other: Carreira 280.59 (not formalized).
 
-## Easy improvement found: 270 → 269.787
+## Final push (2026-11-20): 270 → 269.78667
+The prime-window parameter `δ` (`delta296`, was 2.9·10⁻⁷) appears only in the payment inequalities `PayW'`, and every one of them
+improves as `δ` shrinks. Setting `δ = 10⁻¹²` lowers the threshold `dρ/(η − 4dδ)` to 269.7866626, so μ = 26978667/100000 works
+(margin in the last inequality: 4·10⁻⁴, exact rationals). Patch: [`mu-26978667.patch`](mu-26978667.patch) (supersedes the 269.787 one).
+This is the floor for the current numbers: `dρ/η = 269.786662564`. Anything lower needs a new η or ρ.
+Build check running on the user's computer (Remote Control), result pending.
+
+## First pass: 270 → 269.787
 `CatalanMeasure/GenD/Signed/RouteI/TerminalC.lean:1148` already proves `measure_of_data (μ : ℚ)` for every
 rational `μ ∈ [269.787, 400]`. The criterion's last condition is `μ > dρ/(η − 4dδ) = 269.78696…`; the stated 270 is
 just a round-up. `measure_270` (line 1164) instantiates it at 270.
