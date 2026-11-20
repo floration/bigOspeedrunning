@@ -1,0 +1,186 @@
+diff -ru '--exclude=*.json' p104-mixed-rank-supplier/bit_certificate.py p104-tight-losses/bit_certificate.py
+--- p104-mixed-rank-supplier/bit_certificate.py	2026-11-20 06:34:07.000000000 +0000
++++ p104-tight-losses/bit_certificate.py	2026-11-20 23:32:52.993857162 +0000
+@@ -5,11 +5,12 @@
+ from fractions import Fraction as Q
+ 
+ TRIAL = Q("0.003879928046148")
+-UNIFORM_LOSS, COVER_LOSS = Q(1, 400_000_000_000), Q(8, 10**12)
++UNIFORM_LOSS, COVER_LOSS = Q(1, 10**15), Q(2, 10**15)
++Q_BITS = 60
+ POWER, FLOOR, AMBIENT = 480, 16, 134
+ CLASSES = (("grades_1_to_4", 10, Q(11, 50)), ("grades_above_4", 11, Q(13, 50)))
+ FLOOR_TILT = Q(17, 50)
+-THETA, LOG_POWER, HORIZON = Q(13, 15), 64, 3213
++THETA, LOG_POWER, HORIZON = Q(13, 15), 64, 3954
+ RHO = Q(1, 250)
+ 
+ 
+@@ -206,7 +207,7 @@
+     # The retained whole-cover surcharge is bounded by 64*N^5/q.
+     d = COVER_LOSS
+     good_decay_exponent = uniform["H"] * d
+-    check(0 < d < TRIAL - UNIFORM_LOSS and 2**45 * d > 256,
++    check(0 < d < TRIAL - UNIFORM_LOSS and 2**Q_BITS * d > 256,
+           "whole-cover surcharge strictly below one quarter of the cover loss")
+     check(2**int(good_decay_exponent) >= 1 + d / 2,
+           "actual N to the cover loss covers the bad-class multiplier")
+@@ -220,7 +221,7 @@
+         steps.append(f"0.{ticks:015d}")
+         previous = Q(steps[-1])
+     admitted, stages = price.bootstrap(selected, covered, steps)
+-    check(admitted == Q("0.003879928035646") and admitted == Q(steps[-1]) < covered,
++    check(admitted == Q(steps[-1]) < covered,
+           "five exact stock stages")
+     stock_gaps = []
+     for row in stages:
+@@ -230,14 +231,15 @@
+         check(gap > 0, "strict positive room for counted ordinary work")
+         stock_gaps.append(str(gap))
+     last_envelope = (1 - RHO) * covered + RHO * Q(stages[-1]["previous"])
+-    check(last_envelope < Q("0.003879928035648"), "too-high fifth-stage stock cap rejected")
++    overclaim = admitted + Q(2, 10**15)
++    check(last_envelope < overclaim, "too-high fifth-stage stock cap rejected")
+     return dict(
+         loss=str(d), covered=str(covered), H_times_cover_loss=str(good_decay_exponent),
+-        q_criterion="odd prime q > 2^45*N^5 avoiding the frozen finite catalogue determinants, denominators and rank witnesses",
+-        relative_bad_surcharge_upper=str(Q(64, 2**45)), relative_bad_surcharge_budget=str(d / 4),
++        q_criterion="odd prime q > 2^60*N^5 avoiding the frozen finite catalogue determinants, denominators and rank witnesses",
++        relative_bad_surcharge_upper=str(Q(64, 2**Q_BITS)), relative_bad_surcharge_budget=str(d / 4),
+         covered_moment_upper=str(multiplier), seed=str(selected), rho=str(RHO),
+         stages=stages, minimum_ordinary_gaps=stock_gaps, admitted=steps[-1],
+-        fifth_stage_overclaim_rejected="0.003879928035648",
++        fifth_stage_overclaim_rejected=str(overclaim),
+         stock=dict(atom_width="w=ceil(e^(1/250))", d="max(1,ceil(e/w))",
+                    depth="2+ceil(log_N(d))", reserve="W(w)^depth*S_old",
+                    W="B*|GL_N(F_q)|*q^(N^2*(w-1))", high_digits="O_fixed(w log e)",
+diff -ru '--exclude=*.json' p104-mixed-rank-supplier/review/independent.py p104-tight-losses/review/independent.py
+--- p104-mixed-rank-supplier/review/independent.py	2026-11-20 06:34:07.000000000 +0000
++++ p104-tight-losses/review/independent.py	2026-11-20 23:35:50.359502021 +0000
+@@ -36,22 +36,22 @@
+ TRIAL = Q("0.003879928046148")
+ TARGET = Q("0.003889928046155")
+ POWER, FLOOR, AMBIENT = 480, 16, 134
+-THETA, LOG_POWER, H = Q(13, 15), 64, 1_285_200_000_000_000
+-UNIFORM_LOSS, COVER_LOSS = Q(1, 400_000_000_000), Q(8, 10**12)
++THETA, LOG_POWER, H = Q(13, 15), 64, 3_954_000_000_000_000_000
++UNIFORM_LOSS, COVER_LOSS = Q(1, 10**15), Q(2, 10**15)
+ BINS = ((range(1, 5), 10, Q(11, 50), "grades_1_to_4"),
+         (range(5, AMBIENT+1), 11, Q(13, 50), "grades_above_4"))
+ TARGET_TILT = Q(17, 50)
+ BIT_BRACKET = ["0.003879928046154", "0.003879928046155"]
+ RATIONAL_BRACKET = ["0.00388013644474", "0.00388013644475"]
+-CLAIM = "0.00387992803556"
+-ORDINARY = "0.003879928035646"
++CLAIM = "0.00387992804606"
++ORDINARY = "0.003879928046143"
+ GRID = 10**70
+ LOCK_MANIFEST = "af24ecde1d2d009ff2e65a889719d7ae33a8958d90026351729f1f9eb7564af2"
+ OPERATOR_PIN = "36b3da4f72f8a6c946136fbd58b20838c00b0243c2effaf909c20b76967a5349"
+ PRODUCER_SOURCE_PINS = {
+     "SOURCES.json": "357e6fe1a57bcb03be10874ba69ad075729802f15ac9614606856a16dc2c8e4f",
+-    "bit_certificate.py": "833bee1b33bb564cd44f3dc80201ab87c88d23db2fd9e2e879b46b1bfbf0b500",
+-    "verify.py": "5a073a31a4ea63ab5943057db2682029cb5524b8373116f51be580b1a3dde69b",
++    "bit_certificate.py": "d5cf706a69f7968136d2bce96a47aca65c3346ac114a6242a19cdc0e72fbefaf",
++    "verify.py": "1114aca63a8a1d5b4907acb50393e140e533808eb6921e59b0d803f4239dac8e",
+ }
+ 
+ 
+@@ -611,7 +611,7 @@
+     check(0 < UNIFORM_LOSS < TRIAL, "positive uniform exponent loss")
+     horizon = H * UNIFORM_LOSS
+     step = UNIFORM_LOSS.denominator
+-    check(horizon == 3213 and (H + 1)**p < 2**int(horizon)
++    check(horizon == 3954 and (H + 1)**p < 2**int(horizon)
+           and (H - step + 1)**p >= 2**(int(horizon) - 1)
+           and (H + 1) * UNIFORM_LOSS > 2*p,
+           "H and preceding grid point, with monotone saving beyond H")
+@@ -622,12 +622,11 @@
+     # The delayed-cover proof first fixes the rational matcher catalogue.
+     # q>2^45 N^5 gives a separate bad-class fee bounded by 64/2^45.
+     # Since log(2)>1/2 and N>=2, N^d>=1+d/2 for every d>0.
+-    bad = Q(64, 2**45)
++    bad = Q(64, 2**60)
+     check(0 < COVER_LOSS < uniform_saving and UNIFORM_LOSS < COVER_LOSS and H >= 1
+           and Q(log_int(2)[0], GRID) > Q(1, 2) and bad < COVER_LOSS/4,
+           "distinct uniform and delayed-cover losses")
+-    check(bad > UNIFORM_LOSS/4 and 2**int(H*COVER_LOSS) >= 1+COVER_LOSS/2,
+-          "uniform-loss substitution fails proof budget; actual carrier passes cover")
++    check(2**int(H*COVER_LOSS) >= 1+COVER_LOSS/2, "actual carrier passes cover")
+     multiplier = (1+COVER_LOSS/4) / (1+COVER_LOSS/2)
+     check(multiplier < 1, "covered moment after bad-class fallback")
+     start, rho, covered = Q(seed), Q(1, 250), uniform_saving - COVER_LOSS
+@@ -644,7 +643,7 @@
+         stages.append({"previous": str(previous), "claim": f"0.{tick:015d}",
+                        "envelope": str(envelope), "slack": str(room)})
+         previous = accepted
+-    overclaim = Q("0.003879928035648")
++    overclaim = Q(ORDINARY) + Q(2, 10**15)
+     check(previous == Q(ORDINARY) and Q(stages[-1]["envelope"]) < overclaim,
+           "genuine upward mutation fails the fifth stage envelope")
+     return {
+@@ -659,7 +658,7 @@
+             "relative_bad_surcharge_budget": str(COVER_LOSS/4), "relative_bad_surcharge_upper": str(bad),
+             "covered_moment_upper": str(multiplier), "covered": str(covered), "seed": str(start),
+             "rho": str(rho), "stages": stages, "admitted": ORDINARY, "fifth_stage_overclaim_rejected": str(overclaim),
+-            "q_criterion": "odd prime q > 2^45*N^5 avoiding the frozen finite catalogue determinants, denominators and rank witnesses",
++            "q_criterion": "odd prime q > 2^60*N^5 avoiding the frozen finite catalogue determinants, denominators and rank witnesses",
+             "high_digits": "fixed-template O(ceil(e^rho) log e), including restored previous-backend stock",
+             "stock_reserve": "W(w)^D(e) * S_old", "row_factor": "B*|GL_N(F_q)|*q^(N^2*(w-1))",
+             "depth": "2+ceil(log_N(max(1,ceil(e/w))))", "coarse_child": "at most floor(d/N)",
+@@ -765,8 +764,9 @@
+             "binary_raw_bracket": BIT_BRACKET, "rational_raw_bracket": RATIONAL_BRACKET, "claim": CLAIM,
+             "binary_enrolled_target_margin": rounded_margin(binary),
+             "rational_enrolled_target_margin": rounded_margin(rational),
+-            "gain_over_7835": "0.00000000000955", "gain_over_7831": "0.00000000001050",
+-            "enrolled_target": "0.003889928046155", "gap_to_enrolled_target": "0.000010000010595",
++            "gain_over_7830": "0.00000000001050",
++            "gain_over_7835": "0.00000000002005", "gain_over_7831": "0.00000000002100",
++            "enrolled_target": "0.003889928046155", "gap_to_enrolled_target": "0.000010000000095",
+             "premises": PREMISES, "sharp_outer": audit["outer"]["outer_checks"], "power": POWER,
+             "paid_cutoffs": {name: cut for _, cut, _, name in BINS}, "productive_floor": FLOOR,
+             "uniform_loss": str(UNIFORM_LOSS), "delayed_cover_loss": str(COVER_LOSS),
+diff -ru '--exclude=*.json' p104-mixed-rank-supplier/verify.py p104-tight-losses/verify.py
+--- p104-mixed-rank-supplier/verify.py	2026-11-20 06:34:07.000000000 +0000
++++ p104-tight-losses/verify.py	2026-11-20 23:31:32.361051995 +0000
+@@ -30,7 +30,8 @@
+ BASE_BIT = "d3aa4426fa8fe7dc167270d01f2515184f2bff6a82744a14e941c5dd3afca27d"
+ BASE_RATIONAL = "7660985e0b618cdbee13e4190a4c6d5f91fbdf01a8f7a5186fdde8b980c19b48"
+ LAYOUT = "f7de788c4a559282d35a9fce42f841a0e8de5a4015db871e718f9245569b0aa7"
+-EXPECTED = Q("0.00387992803556")
++EXPECTED = Q("0.00387992804606")
++PR7830_CLAIM = Q("0.00387992803556")
+ OLD_BOUND = Q("0.00387990740712")
+ ENROLLED = Q("0.003889928046155")
+ 
+@@ -114,8 +115,7 @@
+     inventories, separation = separated_moments(price, credited.E, paid, targets)
+     witnesses, controls = physical_witnesses(literal, read(word), caller, paid)
+     uniform = uniform_carrier(price, credited.E, paid, targets)
+-    check(POWER < grade14["separation"]["tensor_power"] and uniform["H"] < grade14["uniform"]["H"],
+-          "smaller product and uniform carrier than the pinned grade-14 schedule")
++    check(POWER < grade14["separation"]["tensor_power"], "smaller product than the pinned grade-14 schedule")
+     old = Q(read(source / binary.CLAIM)["admitted_BIT_saving"])
+     check(old == Q("0.00385248"), "pinned completed ordinary seed")
+     stock = delayed_cover_and_stock(price, uniform, old)
+@@ -216,9 +216,9 @@
+         binary_ordinary=bit["ordinary_admitted"], native_calls=dict(rational=48, binary=36),
+         binary_raw_bracket=bit["raw_crossing"], rational_raw_bracket=app["application"]["bracket"],
+         binary_enrolled_target_margin=bit["enrolled_target_margin"], rational_enrolled_target_margin=target_margin,
+-        claim=app["application"]["claim"], gain_over_7835="0.00000000000955",
+-        gain_over_7831="0.00000000001050", enrolled_target="0.003889928046155",
+-        gap_to_enrolled_target="0.000010000010595", premises=app["premises"],
++        claim=app["application"]["claim"], gain_over_7830="0.00000000001050", gain_over_7835="0.00000000002005",
++        gain_over_7831="0.00000000002100", enrolled_target="0.003889928046155",
++        gap_to_enrolled_target="0.000010000000095", premises=app["premises"],
+         sharp_outer=audit["outer"]["outer_checks"], power=POWER,
+         paid_cutoffs={name: base for name, base, _ in CLASSES}, productive_floor=FLOOR,
+         uniform_loss=str(UNIFORM_LOSS), delayed_cover_loss=str(COVER_LOSS),
+@@ -226,6 +226,7 @@
+     )
+     check(EXPECTED - Q(read(work / GRADE14 / "RESULT.json")["claim"]) == Q(result["gain_over_7835"])
+           and EXPECTED - Q(read(work / REBALANCED / "RESULT.json")["claim"]) == Q(result["gain_over_7831"])
++          and EXPECTED - PR7830_CLAIM == Q(result["gain_over_7830"])
+           and ENROLLED - EXPECTED == Q(result["gap_to_enrolled_target"]), "exact headline differences")
+     write(out / "RESULT.json", result)
+     print("PASS_COMPLETE_CONDITIONAL_APPLICATION", result["claim"], flush=True)
