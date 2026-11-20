@@ -1,0 +1,33 @@
+diff --git a/CatalanMeasure/GenD/Signed/RouteI/Measure270.lean b/CatalanMeasure/GenD/Signed/RouteI/Measure270.lean
+index cacc075d..9dfd0e13 100644
+--- a/CatalanMeasure/GenD/Signed/RouteI/Measure270.lean
++++ b/CatalanMeasure/GenD/Signed/RouteI/Measure270.lean
+@@ -416,7 +416,28 @@ theorem catalan_irrationalityMeasure_270 :
+         |(∑' j : ℕ, (-1 : ℝ) ^ j / ((2 * j + 1 : ℕ) : ℝ) ^ 2) - a / b| :=
+   measure_270 firstData largeData nearData HCirc.hcirc_d HCirc.hseg_d
+ 
++/-- **μ(G) ≤ 269.787.** The terminal `measure_of_data` holds for every rational `μ ≥ 269.787`
++(its last condition is `μ > dρ/(η − 4dδ) = 269.78696…`); the stated value 270 rounds this up. -/
++theorem catalan_irrationalityMeasure_269787 :
++    ∀ᶠ b : ℕ in atTop, ∀ a : ℤ,
++      (b : ℝ) ^ (-(((269787 / 1000 : ℚ)) : ℝ)) <
++        |(∑' j : ℕ, (-1 : ℝ) ^ j / ((2 * j + 1 : ℕ) : ℝ) ^ 2) - a / b| :=
++  measure_of_data (269787 / 1000) (by norm_num) (by norm_num) firstData largeData nearData
++    HCirc.hcirc_d HCirc.hseg_d
++
++/-- The race form: for every real `s > 269.787`, eventually `b^(-s) < |G - a/b|`. -/
++theorem catalan_upperBound_269787 :
++    ∀ s : ℝ, ((269787 / 1000 : ℚ) : ℝ) < s →
++      ∀ᶠ b : ℕ in atTop, ∀ a : ℤ,
++        (b : ℝ) ^ (-s) < |(∑' j : ℕ, (-1 : ℝ) ^ j / ((2 * j + 1 : ℕ) : ℝ) ^ 2) - a / b| := by
++  intro s hs
++  filter_upwards [catalan_irrationalityMeasure_269787, eventually_ge_atTop 1] with b hb hb1 a
++  refine lt_of_le_of_lt ?_ (hb a)
++  have h1 : (1 : ℝ) ≤ b := by exact_mod_cast hb1
++  exact Real.rpow_le_rpow_of_exponent_le h1 (by linarith)
++
+ end
+ end CatalanMeasure.GenD.Signed.RouteI.Measure270
+ 
+ #print axioms CatalanMeasure.GenD.Signed.RouteI.Measure270.catalan_irrationalityMeasure_270
++#print axioms CatalanMeasure.GenD.Signed.RouteI.Measure270.catalan_upperBound_269787
