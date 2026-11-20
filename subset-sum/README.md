@@ -1,4 +1,13 @@
-# Subset Sum: tightened-slack point, T = 0.4875739649
+# Subset Sum: final point, T = 0.4875739537
+
+**Final (20 Nov, second round):** `candidate_final.json`, certified by `certify_final.py` (exit 0 at 512x32 and 1024x32;
+moments agree to 20 digits). tau0 = 0.4875739517, T = 0.4875739537, so O(2^{0.487574 n}); 1.4499e-6 below Voitle's
+0.4875754036. Round two re-optimized kappa and the 64 filter coefficients (12 decimals) against max(M1, M2) with
+the scalars fixed (`filt.py`), then re-optimized the scalars (`step2.py`) and froze (`freeze2.py`). It adds only
+1.1e-8 over round one: the filter was already at its optimum, and the gain is almost all from the slack constants.
+Reproduce: `python certify_final.py candidate_final.json 512 32 0.1 0.25`.
+
+## Round one: tightened-slack point, T = 0.4875739649
 
 Base: Jennifer Voitle's self-contained proof (repo jv1000/subset-sum, `selfcontained-2026/`, HEAD 38e5335, 17 Nov 2026),
 threshold T = 0.4875754036 (listed on bigospeedrun as 0.4875755, Claimed).

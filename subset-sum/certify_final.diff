@@ -1,0 +1,30 @@
+35c35
+< EPS0 = '0.0000013156'          # the fixed common slack eps0 of the paper (exact decimal)
+---
+> EPS0 = '0.000000001'          # the fixed common slack eps0 of the paper (exact decimal)
+66,67c66,67
+<     rho_f = eta - A('1.5e-6')
+<     rho_c = rho_f - A('1e-6')
+---
+>     rho_f = eta - A('1e-8')
+>     rho_c = rho_f - A('1e-9')
+148,149c148,149
+<         'tau0 + 20 eps = 0.4875754036': F('tau0') + 20*F('epsilon') == Fraction('0.4875754036'),
+<         '0.4875754036 < 0.4875755': Fraction('0.4875754036') < Fraction('0.4875755'),
+---
+>         'tau0 + 20 eps = 0.4875739537': F('tau0') + 20*F('epsilon') == Fraction('0.4875739537'),
+>         '0.4875739537 < 0.487574': Fraction('0.4875739537') < Fraction('0.487574'),
+153,158c153,158
+<         'N1 exactly: eps0 - zeta - 1/G0 = 0.0000012956':
+<             fe0 - F('zeta') - Fraction(1, int(cand['input_guard_coefficient'])) == Fraction('0.0000012956'),
+<         'r = 1 - mu - l = 0.0411230499': 1 - F('mu') - F('l') == Fraction('0.0411230499'),
+<         'Delta = 0.0286969377': F('eta') - F('tau0') == Fraction('0.0286969377'),
+<         'Gamma = 0.4588782659': 2*F('tau0') - F('eta') == Fraction('0.4588782659'),
+<         'rho_c = eta - 0.0000025 = 0.5162696413': F('eta') - Fraction('0.0000025') == Fraction('0.5162696413'),
+---
+>         'N1 exactly: eps0 - zeta - 1/G0 = 0.0000000008':
+>             fe0 - F('zeta') - Fraction(1, int(cand['input_guard_coefficient'])) == Fraction('0.0000000008'),
+>         'r = 1 - mu - l = 0.0411232835': 1 - F('mu') - F('l') == Fraction('0.0411232835'),
+>         'Delta = 0.0286972337': F('eta') - F('tau0') == Fraction('0.0286972337'),
+>         'Gamma = 0.458876718': 2*F('tau0') - F('eta') == Fraction('0.458876718'),
+>         'zeta = eps/1 and eps = 1e-10': F('epsilon') == Fraction(1, 10**10) == F('zeta'),
