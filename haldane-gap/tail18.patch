@@ -1,0 +1,75 @@
+--- base/verify_quarter_refinement.py	2026-11-20 22:55:07.275644643 +0000
++++ v2/verify_quarter_refinement.py	2026-11-20 23:51:18.139428362 +0000
+@@ -34,7 +34,8 @@
+     return value
+ 
+ ROOT = Path(__file__).resolve().parent
+-TARGET = Q(303,2000)
++import os
++TARGET = Q(os.environ.get('TARGET','151707/1000000'))
+ BETA = Q(49,4)
+ 
+ 
+@@ -283,17 +284,27 @@
+         lengths.update(range(interval['first'],interval['last']+1))
+     check('every finite integer length covered', lengths==set(range(24,tail_start)))
+ 
++    # Sharpened tail invariant (version 1.8), see paper/tail18.tex:
++    #   p <= lam*w^sigma,  q <= w,  0 < w <= W,  w_+ = C*w^2.
++    # Every fractional power of W below is an exact power of ten.
+     tail=rows[-1]
+-    w0=significant_upper(tail['q']*Q(101,100))
+-    C,B,xmax=Q(6),Q(15,2),Q(1,100)
+-    check('tail starting invariant', tail['p']**3<=w0**2 and tail['q']<=w0 and 0<w0<=xmax**3)
+-    ac,qc=2+xmax,2+3*xmax
+-    check('tail invariant propagates', ac**2/(2*(1-ac*xmax**2)**2)<=3 and
+-          qc**2/(2*(1-qc*xmax**3)**2)<=3 and 3**3<C**2 and 3<=C)
+-    check('tail interpolation coefficients', xmax**2<=Q(1,3) and ac*xmax**2<=Q(1,3)
+-          and ac**3<9 and 2*(1+3*xmax)+3+2<B and B*xmax**3<Q(1,2))
++    sigma,lam,W=Q(73,100),Q(1,10**7),Q(1,10**800)
++    C,B=2+Q(1,10**300),Q(3,2)+Q(1,10**70)
++    Ws,W1s,W2s,W15s=[Q(1,10**k) for k in (584,216,368,76)]   # W^s, W^(1-s), W^(2s-1), W^(3s/2-1)
++    Cs_lo,Cs_hi=Q(8,5),Q(3)                                 # 8/5 <= C^sigma <= 3
++    w0=tail['q']
++    check('tail exponent bookkeeping', Ws**100==W**73 and W1s**100==W**27 and W2s**50==W**23
++          and W15s**200==W**19 and Q(2,3)<sigma<1)
++    check('tail C^sigma enclosure', Cs_lo**100<=C**73 and C**73<=Cs_hi**100 and 2<C<3)
++    check('tail starting invariant', 0<w0<=W and tail['p']**100<=lam**100*w0**73 and C*W<=1)
++    Za=2*lam*Ws+W
++    check('tail spatial update', (2*lam+W1s)**2<=2*(1-Za)**2*lam*Cs_lo and Za<Q(1,3))
++    Zq=2*W+lam*Cs_hi*W*W2s          # bounds 2q+p_+ <= w*(2+lam*C^s*w^(2s-1))
++    check('tail thermal update', (2+lam*Cs_hi*W2s)**2<=2*(1-Zq)**2*C and Zq<Q(1,3))
++    check('tail purity coefficient', Q(3,2)+Q(3,2)*lam*Cs_hi*W2s+(2*lam+W1s)*W15s+2*lam*W15s<=B
++          and 2*lam+W1s<=1 and lam<=1 and B*W<Q(1,2))
+     E=exp_upper(tail['beta']*TARGET)
+-    check('tail exponential comparisons', E*C*w0<1 and E*B*w0/(1-B*w0)<1)
++    check('tail exponential comparisons', E*C*w0<1 and B<=C*(1-B*w0))
+     check('tail all-integer cover', tail['n']%2==0 and tail_start==3*tail['n']//2)
+ 
+     def serialize(x):
+@@ -305,7 +316,7 @@
+             return list(map(serialize,x))
+         return x
+     result={'source_commit':'adc7f1241b42e322a6451854ab7e4b4c146bf78a',
+-            'statement':'Conditional on the cited premises: unique ground state and gamma_L > 303/2000 for every integer L >= 24, J=1',
++            'statement':f'Conditional on the cited premises: unique ground state and gamma_L > {TARGET} for every integer L >= 24, J=1',
+             'additional_bounds':[{'gap':'.063','minimum_length':18},{'gap':'.119','minimum_length':20},
+                                  {'gap':'.145','minimum_length':22}],
+             'isolated_short_bound':'gamma_18 > .088, unique ground state',
+@@ -313,14 +324,14 @@
+             'supports':supports,
+             'seed':initial,'short_seeds':list(short_seeds.values()),'rows':rows,'levels':levels,
+             'short_lengths':short,'finite_intervals':intervals,
+-            'tail':{'start':tail_start,'n0':tail['n'],'beta0':tail['beta'],'w0':w0,'C':C,'B':B},
++            'tail':{'start':tail_start,'n0':tail['n'],'beta0':tail['beta'],'w0':w0,'C':C,'B':B,'sigma':sigma,'lambda':lam,'W':W},
+             'root_directions':'Every Decimal proposal is accepted by directed rational integer-power comparisons',
+             'exponential_bounds':'Rational Taylor upper bound after halving, followed by 40-digit upward-rounded squaring',
+             'product_rounding':'Outward on a 10^-1000 grid; recurrence bounds rounded upward to 15 significant digits',
+             'checks':checks,'success':True}
+     (ROOT/'independent_results/quarter_refinement.json').write_text(json.dumps(serialize(result),indent=2)+'\n')
+     print(f'PASS: {len(checks)} exact checks; {len(intervals)} finite intervals; tail starts at {tail_start}.')
+-    print('gamma_L > 0.1515 for every integer L >= 24; unique ground state; conditional on cited premises.')
++    print(f'gamma_L > {TARGET} = {float(TARGET)} for every integer L >= 24; unique ground state; conditional on cited premises.')
+     print('Finite intervals:',[(x['first'],x['last'],x['level']) for x in intervals])
+     print('Short main lengths:',sorted(x['L'] for x in short if x['target']==TARGET))
+ 

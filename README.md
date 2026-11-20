@@ -15,6 +15,7 @@ Claimed improvements to bounds listed on https://bigospeedrun.com. They aren't L
 | Contingency tables (FPRAS repair coefficient) | 12,062·d^17 (20,000·d^17 without the retuned scales) | 80,000·d^17 | Upstream Math115 PhysicalRepairRefinement development | `contingency-tables/` (Lean refinement + chk.py) |
 | Directed SSSP gap-fill rows | e.g. n log^{15/8} n at m <= n log^{7/8} n; n log^3 n at m <= n log^2 n; n^{3/2} log n at m <= n^{3/2} | n log^2 n / n^2 / n^2 (Lean Verified) | darkhipo/sssp-nlogn @ 1129aca | `directed-sssp/` (Lean, builds with no sorry) |
 | Integer multiplication (kappa, conditional) | kappa >= 0.00387992804606 | 0.00387992803556 (#7830) | CrocSwap/integer-mult-bounds P104 mixed-cutoff BIT supplier (#7830) | `integer-multiplication/` (verify.py replay + independent review) |
+| Haldane gap (spin-one Heisenberg chain) | gamma_L > 0.151707 for L >= 24 | 0.1515 | amachino/haldane-gap-refinement v1.7 @ 15909bdc | `haldane-gap/` (sharper tail invariant, exact receipt) |
 
 ## Caveats
 - None of these is independently reviewed. Each rests on the upstream proof it modifies.
