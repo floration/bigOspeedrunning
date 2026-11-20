@@ -7,7 +7,7 @@ Claimed improvements to bounds listed on https://bigospeedrun.com. They aren't L
 | Binary polynomial multiplication over F2 | kappa = 2/2599 (1/1299.5) | 1/1302 | Csizmadia, arpcs/finite-field-polynomial-multiplication v0.2.1 | `binary-polymul/` (moment checks, incl. interval check) |
 | Van der Waerden lower bound | c = 1249/10000 | 1/9 | DaysSky, commit 987c96c | `van-der-waerden/` (parameter inequalities + sp_check.py) |
 | Catalan's constant, irrationality measure | mu(G) <= 269.78667 | 270 | S. Litsey, slitsey/catalan-irrationality-measure @ 3797a70c | `catalan/` (Lean patch, not built yet) |
-| One-sample matroid prophet inequality | C = 5.11658e-10 (Variant B: 5.11794e-10) | 5.11494e-10 | Chen; darkhipo | `matroid-prophet/` (exact-rational `certify.py`, `--variant-b`) |
+| One-sample matroid prophet inequality | C = 5.168131e-10 (L = 2^24); 5.167937e-10 (L = 2^16); earlier safe value 5.11658e-10 | 5.11494e-10 | Chen; darkhipo | `matroid-prophet/` (exact-rational `certify_final.py`, PASS) |
 | Sidorenko nondirect residual constant | C <= 43 | 189 | rohanarun/sidorenko-template-refinements @ 5ca68cb | `sidorenko/` (new rank lemma, exact-rational audit) |
 | Unit-distance obstruction, selected edges | 29 (6×5 grid minus one edge) | 32 (8×4) | Rohan Arun; OpenAI power-saving paper @ fd4aeeb2 | `unit-distance-grid/` (proof draft + check_grid.py, check_29.py; same imported lemmas) |
 | Heilbronn triangle problem (eta) | 1/39,569,962 (~2.527e-8) | ~1.98e-8 | Blinov, littleBro/heilbronn-triangle-bounds PR #13 @ e29a291 | `heilbronn/` (smaller 3-AP-free packing + verify scripts) |

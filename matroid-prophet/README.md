@@ -44,6 +44,29 @@ Gain split: items 1+3 give about +0.008 %, item 2 gives about +0.024 %.
   it at other values. darkhipo declined a similar κ change for that reason.
   Run `python3 certify.py --variant-b --fraction`. Output: `certify_output_variant_b.txt`.
 
+## Combined with q's fine phase grid (Nov 20, after q's work log)
+
+q's Variant R swaps the phase grid θ = 261/256, L = 256 (so L(θ−1) = 5) for
+L = 2¹⁶ phases with L(θ−1) ≈ 4.95. That cuts the 1/(L(θ−1)) rounding loss toward
+1/ln B. Stacking it with items 1–3 above, plus re-tuned ρ, h, t, gives:
+
+| Version | C | vs board rank 1 |
+|---|---|---|
+| L = 2¹⁶ (`certify_combined.py`) | 5.1677088608·10⁻¹⁰ | +1.0317 % |
+| L = 2²⁴ (`certify_combined.py --L24`) | 5.1679026178·10⁻¹⁰ | +1.0355 % |
+
+Parameters (L = 2¹⁶): κ = 164, ρ = 23835/2¹⁶, h = 49459/2¹⁶, t = 1491/2²⁴,
+L(θ−1) = 9867/2000, μ = 1679/128, ν = 7211/512, v = 1000/624979. a, b and d are
+computed and printed by the script. The L = 2²⁴ run bounds B from below through rigorous
+logs, because the exact power is too large. Both pass all 15 exact checks.
+
+**Discrepancy to resolve before submitting either set:** using Chen's formulas, which this
+code reproduces digit for digit (C₁₄₁), q's Variant R parameters evaluate to
+5.16626·10⁻¹⁰, not the 5.16775·10⁻¹⁰ in q's log. q's shuffler best (5.16794·10⁻¹⁰) is
+also above the ceiling of the formula as reproduced here. q's `certify.py` probably uses a
+slightly different (or extra-tightened) chain, and it should be compared line by line
+against Chen §1 and App. A.
+
 ## Checking
 
 `python3 certify.py --fraction` (stdlib only, under a second). It first reproduces
@@ -53,3 +76,15 @@ inequalities, and prints the exact numerator/denominator.
 
 Not checked: the universal matroid argument itself (inherited from OpenAI, Shea, Chen;
 no Lean proof exists for any row).
+
+## Reconciled with q's checker; final value (Nov 20, late)
+
+q's `certify.py` is sound, and its chain is slightly tighter than the one above. It uses
+α₁ directly in the log M* bound, where Chen bounds it by a/3, and that accounts for the
+whole gap between the two checkers. With q's chain and the phase grid refined from
+L = 2¹⁶ to L = 2²⁴ (24 phase bits instead of 16):
+
+**C = 5.168130984950750·10⁻¹⁰**, which is +1.0400 % over the board's best and +0.0037 % over
+q's shuffler best. Run `python3 certify_final.py --fraction`, which passes 11 exact checks
+(output in `certify_final_output.txt`). Going to L = 2³² adds only about 1.5·10⁻⁷ relative,
+so this is the ceiling of the chain.

@@ -1,0 +1,22 @@
+[PASS] B_lo <= B = theta^L exactly
+[PASS] B_lo > 1
+[PASS] q0 > p^(-1/4)  [q0^4 p > 1]
+[PASS] tilt (3a): rho p^mu (p^-1/4 + 3/v) < a   [exact integer powers]
+[PASS] tilt (3b): (1-p) p^nu / v < b             [exact integer powers]
+[PASS] 0 < d < lambda = -ln p
+[PASS] la >= log(1+a), bY >= log(1+X/(1+a)) + 2log(1+v)  [rigorous upper bounds]
+[PASS] 0 < gamma <= rho/4
+[PASS] s(B_lo) > 0
+[PASS] (1-t)(gamma kappa + a0)/K <= 1/4
+[PASS] domains: kappa>=4 int, 0<rho,h,t,v,a,b<1, mu>1/4, nu>0
+[PASS] rho, h, t dyadic; L a power of 2 (fair-bit seed)
+[PASS] C > board rank 1 (5.1149356887949946750e-10)
+[PASS] C > C141
+params: kappa=164 rho=23835/65536 h=49459/65536 t=1491/16777216 L=65536 L(theta-1)=9867/2000
+        mu=1679/128 nu=7211/512 v=1000/624979 a=11830071089/10000000000000 b=1296630157/5000000000000 d=126411131025657/125000000000000 q0=12877/10000
+B_lo   = 138.83890639914179132575
+C      = 5.167708860804884e-10
+C / board rank 1 = 1.0103174654
+336713603388902699505014844452669849156150853494777161738162975115826130623562114706665036203304717
+651572316588397549338641354460289615855933285704936846403411910047778583631026839201452061349642240000000000
+RESULT: PASS
