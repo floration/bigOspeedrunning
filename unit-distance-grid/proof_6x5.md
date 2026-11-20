@@ -1,4 +1,4 @@
-# A 6×5 final grid (30 edges) for the unit-distance obstruction
+# 29 selected edges (6×5 grid minus one edge) for the unit-distance obstruction
 
 Draft, 2026-11-20. Conditional on the same imported lemmas as the current record
 (Rohan Arun, 8×4 = 32): the source's generic-grid lemma, private-valuation lemma and
@@ -90,7 +90,31 @@ dim 𝒦_6 = 15 − 12 = 3 < 4, which is impossible.
 If V_1 = V_2 is a single line, use the existing common-line argument on a 4×3
 sub-grid (12 edges, from the 8×4 note). The 6×5 grid contains it. ∎
 
-## Sharpness for this differential system
+
+## Refinement: 29 edges (6×5 minus one edge)
+
+The step lemma has a degree-4 version. Add a point p adjacent to only r_1, …, r_4.
+Its one residual is c_4 = α − R_4β. If c_4 = 0 on the basis, then β = 0 and
+A_p = A'_4, which is the contradiction. Otherwise the dimension drops by exactly 1.
+(This is the source's own single-point argument, read linearly.)
+
+Run the induction on the grid {p_1..p_6} × {r_1..r_5} with the edge (p_6, r_5)
+deleted:
+* Points p_1 to p_5 each have all 5 anchors, so the dimension goes 15 → 5.
+* Point p_6 has 4 anchors. It must either drop the dimension to 4, the trivial
+  space, or give the contradiction directly.
+* A dimension-4 kernel is trivial, so X* has A_i = A'_ℓ: the contradiction.
+
+The 4×3 common-line sub-grid p_1..p_4 × r_1..r_3 is untouched. So the final step
+uses **29 selected edges**.
+
+**Floor for this method.** Each step is a rank count, so a contradiction needs
+E ≥ 3V − 4, where V is the number of vertices. For V ≤ 10, a bipartite graph has
+at most 25 < 3V − 4 edges, so V ≥ 11 and E ≥ 29. Numerically, none of the 435
+subgraphs of 6×5 with 28 edges forces the contradiction (plane/plane). The 29-edge
+graph forces it on all 8 locus pairs tested.
+
+## Sharpness for this differential system (complete grids)
 
 The same linear system on a generic **5×5** (25 edges), **7×4** or **4×7** (28
 edges) plane–plane grid has a 5-dimensional kernel. Its extra direction has

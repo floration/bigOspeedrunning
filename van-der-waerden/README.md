@@ -25,3 +25,16 @@ Caveats:
 ## Beyond 1/8
 Needs gamma > 1/2 (beat the outer color margin), b > 1/2 (impossible with these keys since b < a < 1/2),
 or a new idea for rich progressions without repeated keys. Hard.
+
+## Final push (2026-11-20, second round)
+The audit script's short-period checks were read this time (sp_margins / sp_valid, 16 margins),
+and are re-implemented exactly in sp_check.py next to this file.
+
+Final proposal, c = 1249/10000 = 0.1249:
+a = 49999/100000, m = 99999/100000, b = 24999/50000, gamma = 49997/100000,
+eps = eps_reg = delta = 1/100000, delta_s = 1/2.
+- All 16 short-period margins are positive (gamma*b/2 = 0.1249875 > 0.1249).
+- DaysSky's own 1/9 parameters also pass (sanity check).
+- All five rejection controls (b=a, m=2a, c=gamma*b/2, gamma at bound, c=1/8) are rejected.
+- c = 0.12499 fails with these margins. Going further only means smaller margins; 1/8 itself is unreachable.
+Same caveats as above: parameter tuning only, on unreviewed lemmas.
