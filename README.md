@@ -13,7 +13,7 @@ Claimed improvements to bounds listed on https://bigospeedrun.com. They aren't L
 | Heilbronn triangle problem (eta) | 1/40,251,724 (~2.484e-8) | ~1.98e-8 | Blinov, littleBro/heilbronn-triangle-bounds PR #13 @ e29a291 | `heilbronn/` (smaller 3-AP-free packing + verify scripts) |
 | Subset Sum threshold T | 0.4875739649 | 0.4875755 | Jennifer Voitle, jv1000/subset-sum @ 38e5335 | `subset-sum/` (tightened slack constants + certify scripts) |
 | Contingency tables (FPRAS repair coefficient) | 20,000·d^17 | 80,000·d^17 | Upstream Math115 PhysicalRepairRefinement development | `contingency-tables/` (Lean refinement + chk.py) |
-| Directed SSSP (time at density m <= n log^{7/8} n) | n log^{15/8} n | n log^2 n (Lean Verified) | darkhipo/sssp-nlogn @ 1129aca | `directed-sssp/` (Lean, builds with no sorry) |
+| Directed SSSP gap-fill rows | e.g. n log^{15/8} n at m <= n log^{7/8} n; n log^3 n at m <= n log^2 n; n^{3/2} log n at m <= n^{3/2} | n log^2 n / n^2 / n^2 (Lean Verified) | darkhipo/sssp-nlogn @ 1129aca | `directed-sssp/` (Lean, builds with no sorry) |
 
 ## Caveats
 - None of these is independently reviewed. Each rests on the upstream proof it modifies.
