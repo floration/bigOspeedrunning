@@ -1,0 +1,8 @@
+verify.py run on q's PC (Lean 4.33.1, x86_64-w64-windows-gnu), 2026-11-21:
+Build completed successfully (3262 jobs).
+Exact APSP theorem passed. Transitive axioms: [propext, Classical.choice, Quot.sound]
+PASS: EndStatement.APSP.SolvedInTime (149778035661233/50000000000000)   = 2.99556071322466
+Canonical statement SHA-256: 4291e3f05781cea42f9d672ff73ceac1f6d1a0c3021038e94372fa8f7e1ad987
+Source files checked: 408
+Tree = fringewidth/apsp-bound f1f7486 + final-1807-90.patch (sha256 8c6e1da06c844e49ca9521ce116e941c6b7b8ce0e32804d36e4004eef3ab2f11).
+Note: verification.json / verification.txt are fringewidth's originals (c=20 run), not regenerated.
