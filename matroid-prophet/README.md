@@ -88,3 +88,25 @@ L = 2¹⁶ to L = 2²⁴ (24 phase bits instead of 16):
 q's shuffler best. Run `python3 certify_final.py --fraction`, which passes 11 exact checks
 (output in `certify_final_output.txt`). Going to L = 2³² adds only about 1.5·10⁻⁷ relative,
 so this is the ceiling of the chain.
+
+## Five-idea round (Nov 21)
+
+- **Novel, decoupling the max-branch coin (gain):** Chen's max-branch probability is t,
+  the same as the C/T mask rate. Inequality (30) only needs τ/4 ≥ (1−τ)·t·(γκ+a₀)/K, and
+  the smallest such τ is about 0.34·t. With τ = 32399/2³⁰ (30 shared branch bits), the
+  bound is **C = 5.1684343637·10⁻¹⁰** (+1.0459 % over the board). See
+  `certify_final_tau.py`; all exact checks pass. It is an algorithm change, but a
+  one-line one.
+- **Crazy, drop the max branch or use one huge phase:** dead. Without the branch, the
+  −t(γκ+a₀)/K·m* term (γκ+a₀ ≈ 15) swamps the βts/K·W term (s ≈ 0.005). With L = 1,
+  the rounding loss becomes B−1.
+- **Borrowed, sharper tail integration (large deviations) and equidistribution for
+  the rounding:** no gain. ∫min(1, M e^(−λx)) dx is exact for that tail shape, and the
+  phase-rounding bound βx/(L(θ−1)) is tight at the worst position x → θ^(k+1).
+- **Reverse, start from a 2× target:** s/(1−h) = 0.0211 is a small difference:
+  ρ/4 = 0.0909 minus losses of 0.0698. The largest loss is the activation charge
+  μρ/(κh) = 0.0385, followed by Kt/h = 0.0210. Halving the activation charge alone would
+  roughly double C. That needs a new tilt or overlap argument, because μ is pinned by
+  the tilt p^μ ≈ a·v/(3ρ).
+- **Breaking, non-uniform phase law:** dead. Minimax over cyclic shifts makes the
+  uniform phase optimal for worst-case rounding.
