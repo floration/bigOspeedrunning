@@ -60,3 +60,7 @@ network policy), and a full build of this repo takes hours. Gain beyond 269.787 
 - Lean Verified below 528.23: medium. Port the 270 development to the v4.34.1 profile pin (as done for 295) and run the verifier chain.
 - Real progress (e.g. < 260): hard. Needs a better design / sharper corank profile (η) or energy bound (ρ); each piece is a large
   certified computation in Lean.
+
+## Build status (2026-11-21)
+- 269.78667 (`mu-26978667.patch`): full Lean build passes, standard axioms only.
+- 269.78167 and 269.7816584 (gamified): builds running.
