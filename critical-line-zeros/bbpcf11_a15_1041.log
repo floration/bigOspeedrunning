@@ -1,0 +1,66 @@
+R=11 G=4000 cells=80000 T=0.01041
+  gap 1: cutoff_cells=180495 components=1: [2998,180494]
+  gap 2: cutoff_cells=97199 components=1: [3264,97198]
+  gap 3: cutoff_cells=66285 components=1: [3435,65955]
+  gap 4: cutoff_cells=51427 components=1: [3514,51260]
+  gap 5: cutoff_cells=46129 components=1: [3550,45554]
+  gap 6: cutoff_cells=46129 components=1: [3550,45554]
+  gap 7: cutoff_cells=51427 components=1: [3514,51260]
+  gap 8: cutoff_cells=66285 components=1: [3435,65955]
+  gap 9: cutoff_cells=97199 components=1: [3264,97198]
+  gap 10: cutoff_cells=180495 components=1: [2998,180494]
+work boxes after presplit: 290263 checksum=2638aa3a11fb31d5
+progress 1000341504 nodes
+progress 2000683008 nodes
+progress 3001024512 nodes
+progress 4000317440 nodes
+progress 5000658944 nodes
+progress 6001000448 nodes
+progress 7000293376 nodes
+progress 8000634880 nodes
+progress 9000976384 nodes
+progress 10000269312 nodes
+progress 11000610816 nodes
+progress 12000952320 nodes
+progress 13000245248 nodes
+progress 14000586752 nodes
+progress 15000928256 nodes
+progress 16000221184 nodes
+progress 17000562688 nodes
+progress 18000904192 nodes
+progress 19000197120 nodes
+progress 20000538624 nodes
+progress 21000880128 nodes
+progress 22000173056 nodes
+progress 23000514560 nodes
+progress 24000856064 nodes
+progress 25000148992 nodes
+progress 26000490496 nodes
+progress 27000832000 nodes
+progress 28000124928 nodes
+progress 29000466432 nodes
+progress 30000807936 nodes
+progress 31000100864 nodes
+progress 32000442368 nodes
+progress 33000783872 nodes
+progress 34000076800 nodes
+progress 35000418304 nodes
+progress 36000759808 nodes
+progress 37000052736 nodes
+progress 38000394240 nodes
+progress 39000735744 nodes
+progress 40000028672 nodes
+progress 41000370176 nodes
+progress 42000711680 nodes
+progress 43000004608 nodes
+progress 44000346112 nodes
+progress 45000687616 nodes
+progress 46001029120 nodes
+progress 47000322048 nodes
+progress 48000663552 nodes
+progress 49001005056 nodes
+progress 50000297984 nodes
+progress 51000639488 nodes
+progress 52000980992 nodes
+progress 53000273920 nodes
+VERIFIED R=11: F >= 1041/100000 with weights tilt/weights11_a15.txt; grid=4000 threads=4 nodes=53246449737

@@ -2,7 +2,9 @@
 
 **Result (certified finite step, unrefereed argument):**
 
-    liminf N0s(T,2T)/N(T,2T) >= (20000/19807) * (H(3/2) - 13749/2500000) = 0.6733975489...
+    liminf N0s(T,2T)/N(T,2T) >= (100000/98959) * (H(3/2) - 29997/5000000) = 0.6734096571...   (11 zeros)
+
+Earlier 10-zero step: (20000/19807) * (H(3/2) - 13749/2500000) = 0.6733975489...
 
 where H(3/2) = 2 - R(psi) for the window psi(t) = cos(3t/2) on [-1/2,1/2]:
 
@@ -38,6 +40,14 @@ Every ingredient carries over for psi = cos(3t/2)1_{[-1/2,1/2]}:
    `table_a.py` / `dtable_a.py` (the authors' table scripts with sqrt2 -> 3/2, Arb 128-bit):
    3,659,042,858 nodes, log `bbpcf10_a15_193.log`. Table sha256 in `tables.log`.
    Numerical minimum of F with these rounded weights: 0.009655039 (`minF.py`).
+
+**Tighter target (max gamified, same weights):** F >= 4827/500000 also VERIFIED (3,768,836,024 nodes,
+`bbpcf10_a15_4827.log`), giving (500000/495173)(H(3/2) - 13749/2500000) = 0.6734002688. The next step,
+1931/200000, fails at one cell (lb 0.00965498), so grid 1/4000 is exhausted for these weights.
+
+**11 zeros:** weights `weights11_a15.txt` (linear total 29997/5000000, numerical min 0.01042322),
+F >= 1041/100000 VERIFIED (53,246,449,737 nodes, `bbpcf11_a15_1041.log`). Block condition 12 * 0.01041 = 0.125 <= 0.446.
+Bound 0.6734096571. Tighter targets up to ~0.010422 (-> ~0.673418) untried; each run takes hours.
 
 ## Reproduce
 

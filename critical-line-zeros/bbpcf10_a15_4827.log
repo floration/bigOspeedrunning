@@ -1,0 +1,15 @@
+R=10 G=4000 cells=80000 T=0.0096540000000000011
+  gap 1: cutoff_cells=165734 components=1: [3069,165733]
+  gap 2: cutoff_cells=73317 components=1: [3415,73146]
+  gap 3: cutoff_cells=54551 components=1: [3525,54029]
+  gap 4: cutoff_cells=45662 components=2: [3580,5550] [6324,45197]
+  gap 5: cutoff_cells=44234 components=2: [3609,5404] [6489,44215]
+  gap 6: cutoff_cells=45662 components=2: [3580,5550] [6324,45197]
+  gap 7: cutoff_cells=54551 components=1: [3525,54029]
+  gap 8: cutoff_cells=73317 components=1: [3415,73146]
+  gap 9: cutoff_cells=165734 components=1: [3069,165733]
+work boxes after presplit: 221224 checksum=b09383326c278352
+progress 1000341504 nodes
+progress 2000683008 nodes
+progress 3001024512 nodes
+VERIFIED R=10: F >= 4827/500000 with weights tilt/weights10_a15.txt; grid=4000 threads=4 nodes=3768836024
