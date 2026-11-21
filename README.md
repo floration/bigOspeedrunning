@@ -4,7 +4,7 @@ Claimed improvements to bounds listed on https://bigospeedrun.com. They aren't L
 
 | Problem | New bound | Previous listed bound | Builds on | Evidence |
 |---|---|---|---|---|
-| Binary polynomial multiplication over F2 | kappa = 2/2599 (1/1299.5) | 1/1302 | Csizmadia, arpcs/finite-field-polynomial-multiplication v0.2.1 | `binary-polymul/` (moment checks, incl. interval check) |
+| Binary polynomial multiplication over F2 | As intended: kappa = 1/1285 (re-optimised finite unit, `round2/`). Max gamified: 20/25679 ≈ 1/1283.95 (margins at the edge). Earlier: 2/2599 | 1/1302 | Csizmadia, arpcs/finite-field-polynomial-multiplication v0.2.1 | `binary-polymul/` (moment checks, incl. interval check) |
 | Van der Waerden lower bound | Gamed: c = 0.1249; max gamified c = 1/8 - 10^-11 (parameter tuning inside DaysSky's region; no new math) | 1/9 | DaysSky, commit 987c96c | `van-der-waerden/` (parameter inequalities + sp_check.py) |
 | Catalan's constant, irrationality measure | As intended: mu(G) <= 269.78167 (build pending). Max gamified: 269.7816584 (every margin at its edge; not built) | 270 | S. Litsey, slitsey/catalan-irrationality-measure @ 3797a70c | `catalan/` (Lean patch, not built yet) |
 | One-sample matroid prophet inequality | **As intended: C = 5.116809e-10** (`certify_as_intended.py`). Gamed: 5.168434e-10 (`certify_final_tau.py`, re-tunes the algorithm's free numbers) | 5.11494e-10 | Chen; darkhipo | `matroid-prophet/` (exact-rational `certify_final_tau.py`, PASS) |
@@ -14,8 +14,10 @@ Claimed improvements to bounds listed on https://bigospeedrun.com. They aren't L
 | Subset Sum threshold T | 0.4875739537 | 0.4875755 | Jennifer Voitle, jv1000/subset-sum @ 38e5335 | `subset-sum/` (tightened slack constants + certify scripts) |
 | Contingency tables (FPRAS repair coefficient) | As intended: 12,062·d^17 (compiles); 11,232·d^17 (build pending). Max gamed: 2048·d^5 at U = 2 (build pending; the padding count fails there, so the sampler isn't valid) | 80,000·d^17 | Upstream Math115 PhysicalRepairRefinement development | `contingency-tables/` (Lean refinement + chk.py) |
 | Directed SSSP gap-fill rows (gamed: not in the as-intended submission) | e.g. n log^{15/8} n at m <= n log^{7/8} n; n log^3 n at m <= n log^2 n; n^{3/2} log n at m <= n^{3/2} | n log^2 n / n^2 / n^2 (Lean Verified) | darkhipo/sssp-nlogn @ 1129aca | `directed-sssp/` (Lean, builds with no sorry; plus a paper-only O(m log^{1/6} n) extension of C-HD) |
-| Integer multiplication (kappa, conditional) | kappa >= 0.00387992804606 | 0.00387992803556 (#7830) | CrocSwap/integer-mult-bounds P104 mixed-cutoff BIT supplier (#7830) | `integer-multiplication/` (verify.py replay + independent review) |
+| Integer multiplication (kappa, conditional) | As intended: kappa >= 0.00387992804606. Max gamified: 0.003879928046140 (`p104-max-gamified/`) | 0.00387992803556 (#7830) | CrocSwap/integer-mult-bounds P104 mixed-cutoff BIT supplier (#7830) | `integer-multiplication/` (verify.py replay + independent review) |
 | Haldane gap (spin-one Heisenberg chain) | As intended: gamma_L > 0.151707 for L >= 24. Max gamified: 0.151707452 (same certificate, last digits squeezed) | 0.1515 | amachino/haldane-gap-refinement v1.7 @ 15909bdc | `haldane-gap/` (sharper tail invariant, exact receipt) |
+| Average sensitivity of PTFs | As intended: C = 476765550/149384251 (Lean built, standard axioms, `verified/`). Max gamified: 353514424368353/110766156451452 (build pending) | 90295/28292 (Lean Verified, verifier#93) | darkhipo/average-sensitivity-lean @ 78fe0e6 | `average-sensitivity/` |
+| APSP exponent | Lean: ~2.99556071322463 (c ≈ 20.078 retune of Li Xuanji's proof, build pending). Claimed, max gamified: 2.99294791870930934671834 | 2.9955607647814 (LV) / 2.9929479187094 (Claimed) | Li Xuanji; shreshth-s / Wharton | `apsp/` |
 
 ## Caveats
 - "Gamed" marks values that stretch how the metric is read (free parameters, partial edge counts, gap-fill densities). They're kept here for reference, but the as-intended values are the ones claimed.

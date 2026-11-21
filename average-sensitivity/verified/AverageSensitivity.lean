@@ -1,0 +1,9 @@
+import OAI.Combinatorics.GotsmanLinial.Main
+import AverageSensitivity.Multilinearization
+import AverageSensitivity.WallisMAD
+import AverageSensitivity.WallisAssembly
+
+#print axioms OAI.LeanBlast.GotsmanLinial.gotsmanLinialStatement
+#print axioms AverageSensitivity.polynomial_bound_3762
+#print axioms AverageSensitivity.polynomial_bound_3762_general
+#print axioms AverageSensitivity.AS_bound_476765550_149384251

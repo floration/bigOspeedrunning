@@ -1,0 +1,580 @@
+{
+  "parameters": {
+    "c": "10.665500244065728984988793189461567825",
+    "theta": "0.065297823698726309898991017790292117",
+    "b": "0.046046352103722105477242590837027668",
+    "R": 1000000000000000000000000,
+    "S": 768979037380739753746206,
+    "delta": "0.007052081290690653",
+    "exponent": "2.992947918709309347"
+  },
+  "derived": {
+    "eta": {
+      "lower": "0.0000000000000000000000000460",
+      "upper": "0.0000000000000000000000000461"
+    },
+    "u": {
+      "lower": "0.0354086795156148255463846819",
+      "upper": "0.0354086795156148255463846820"
+    },
+    "v": {
+      "lower": "0.0106376725881072799308579088",
+      "upper": "0.0106376725881072799308579089"
+    },
+    "e": {
+      "lower": "0.0814550316193369310236272727",
+      "upper": "0.0814550316193369310236272728"
+    },
+    "C_K": {
+      "lower": "2.3938611080082115102077892415",
+      "upper": "2.3938611080082115102077892416"
+    },
+    "T": {
+      "lower": "12.0593613520739404951965824310",
+      "upper": "12.0593613520739404951965824311"
+    },
+    "G": {
+      "lower": "0.0865763741108969369942156388",
+      "upper": "0.0865763741108969369942156389"
+    },
+    "q1": {
+      "lower": "0.3481258021903767531067933433",
+      "upper": "0.3481258021903767531067933434"
+    },
+    "q2": {
+      "lower": "0.4787214495878293729047753789",
+      "upper": "0.4787214495878293729047753790"
+    },
+    "E": {
+      "lower": "12.4074871542643172483033757743",
+      "upper": "12.4074871542643172483033757744"
+    },
+    "Ebox": {
+      "lower": "11.9727849779630435582023667921",
+      "upper": "11.9727849779630435582023667922"
+    }
+  },
+  "checks_passed": 47,
+  "stage_identities_passed": true,
+  "smallest_runtime_gap": "0.0000000000000000002816651585",
+  "binding_condition": "phase II final: residual queries",
+  "checks": [
+    {
+      "condition": "ordinary tail c > 5",
+      "value": {
+        "lower": "5.6655002440657289849887931894",
+        "upper": "5.6655002440657289849887931895"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "5.6655002440657289849887931894",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "theta > 0",
+      "value": {
+        "lower": "0.0652978236987263098989910177",
+        "upper": "0.0652978236987263098989910178"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.0652978236987263098989910177",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "unweighted binomial tail increasing",
+      "value": {
+        "lower": "0.4347021763012736901010089822",
+        "upper": "0.4347021763012736901010089823"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.4347021763012736901010089822",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "stored binomial tail increasing",
+      "value": {
+        "lower": "0.7347021763012736901010089822",
+        "upper": "0.7347021763012736901010089823"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.7347021763012736901010089822",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "ordinary private tail geometric",
+      "value": {
+        "lower": "0.5861569604267656240034155927",
+        "upper": "0.5861569604267656240034155928"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.5861569604267656240034155927",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "box private tail geometric",
+      "value": {
+        "lower": "0.6157757381081852750180508421",
+        "upper": "0.6157757381081852750180508422"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.6157757381081852750180508421",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "G > 0",
+      "value": {
+        "lower": "0.0865763741108969369942156388",
+        "upper": "0.0865763741108969369942156389"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.0865763741108969369942156388",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "G < 1",
+      "value": {
+        "lower": "0.9134236258891030630057843611",
+        "upper": "0.9134236258891030630057843612"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.9134236258891030630057843611",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "q1 > 0",
+      "value": {
+        "lower": "0.3481258021903767531067933433",
+        "upper": "0.3481258021903767531067933434"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.3481258021903767531067933433",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "q2 > 0",
+      "value": {
+        "lower": "0.4787214495878293729047753789",
+        "upper": "0.4787214495878293729047753790"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.4787214495878293729047753789",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "cache slope positive",
+      "value": {
+        "lower": "12.9074871542643172483033757743",
+        "upper": "12.9074871542643172483033757744"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "12.9074871542643172483033757743",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "ordinary encoder slope positive",
+      "value": {
+        "lower": "12.4727849779630435582023667921",
+        "upper": "12.4727849779630435582023667922"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "12.4727849779630435582023667921",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "geometry slope positive",
+      "value": {
+        "lower": "11.5593613520739404951965824310",
+        "upper": "11.5593613520739404951965824311"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "11.5593613520739404951965824310",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "frozen factors positive",
+      "value": {
+        "lower": "768979037380739753746206.0000000000000000000000000000",
+        "upper": "768979037380739753746206.0000000000000000000000000000"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "768979037380739753746206.0000000000000000000000000000",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "at least two cyclic factors",
+      "value": {
+        "lower": "231020962619260246253794.0000000000000000000000000000",
+        "upper": "231020962619260246253794.0000000000000000000000000000"
+      },
+      "threshold": "1",
+      "strict_gap_lower": "231020962619260246253793.0000000000000000000000000000",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "cyclic exponent positive",
+      "value": {
+        "lower": "0.0106376725881072799308579088",
+        "upper": "0.0106376725881072799308579089"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.0106376725881072799308579088",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "candidate exponent positive",
+      "value": {
+        "lower": "0.0000000000000000000000000460",
+        "upper": "0.0000000000000000000000000461"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.0000000000000000000000000460",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "middle blocks fit",
+      "value": {
+        "lower": "0.9539536478962778945227574091",
+        "upper": "0.9539536478962778945227574092"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.9539536478962778945227574091",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "incidence bookkeeping",
+      "value": {
+        "lower": "0.0460463521037221054772425447",
+        "upper": "0.0460463521037221054772425448"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0389942708130314524772425447",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase I initial: boxes",
+      "value": {
+        "lower": "0.0500328783098960366811676868",
+        "upper": "0.0500328783098960366811676869"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0429807970192053836811676868",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase I initial: residual queries",
+      "value": {
+        "lower": "0.0300164288396733053169300975",
+        "upper": "0.0300164288396733053169300976"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0229643475489826523169300975",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase I initial: stored queries",
+      "value": {
+        "lower": "0.0240029756763966625681626853",
+        "upper": "0.0240029756763966625681626854"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0169508943857060095681626853",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase I initial: polynomial cache",
+      "value": {
+        "lower": "0.4747268298760583611000578744",
+        "upper": "0.4747268298760583611000578745"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.4676747485853677081000578744",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase I initial: ordinary box encodings",
+      "value": {
+        "lower": "0.4947432793462810924642954637",
+        "upper": "0.4947432793462810924642954638"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.4876911980555904394642954637",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase I initial: matrix formation",
+      "value": {
+        "lower": "0.9999999999999999999999999539",
+        "upper": "0.9999999999999999999999999540"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.9929479187093093469999999539",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase I initial: tile geometry",
+      "value": {
+        "lower": "0.4447104010363850557831277768",
+        "upper": "0.4447104010363850557831277769"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.4447104010363850557831277768",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "phase I freeze: boxes",
+      "value": {
+        "lower": "0.0176897538787979332125230707",
+        "upper": "0.0176897538787979332125230708"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0106376725881072802125230707",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase I freeze: residual queries",
+      "value": {
+        "lower": "0.0176897538787979332125230674",
+        "upper": "0.0176897538787979332125230675"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0106376725881072802125230674",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase I freeze: stored queries",
+      "value": {
+        "lower": "0.0070520812906906532816651652",
+        "upper": "0.0070520812906906532816651653"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0000000000000000002816651652",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase I freeze: polynomial cache",
+      "value": {
+        "lower": "0.0176897538787979332125231416",
+        "upper": "0.0176897538787979332125231417"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0106376725881072802125231416",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase I freeze: ordinary box encodings",
+      "value": {
+        "lower": "0.0530984333944127587589078269",
+        "upper": "0.0530984333944127587589078270"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0460463521037221057589078269",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase I freeze: matrix formation",
+      "value": {
+        "lower": "0.9468869807265777616804229310",
+        "upper": "0.9468869807265777616804229311"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.9398348994358871086804229310",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase I freeze: tile geometry",
+      "value": {
+        "lower": "0.0354086795156148255463847562",
+        "upper": "0.0354086795156148255463847563"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.0354086795156148255463847562",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "phase II start: boxes",
+      "value": {
+        "lower": "0.0176897538787979332125230707",
+        "upper": "0.0176897538787979332125230708"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0106376725881072802125230707",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase II start: residual queries",
+      "value": {
+        "lower": "0.0176897538787979332125230674",
+        "upper": "0.0176897538787979332125230675"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0106376725881072802125230674",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase II start: stored queries",
+      "value": {
+        "lower": "0.0070520812906906532816651652",
+        "upper": "0.0070520812906906532816651653"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0000000000000000002816651652",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase II start: polynomial cache",
+      "value": {
+        "lower": "0.0176897538787979332125231416",
+        "upper": "0.0176897538787979332125231417"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0106376725881072802125231416",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase II start: ordinary box encodings",
+      "value": {
+        "lower": "0.0530984333944127587589078269",
+        "upper": "0.0530984333944127587589078270"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0460463521037221057589078269",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase II start: matrix formation",
+      "value": {
+        "lower": "0.9468869807265777616804229310",
+        "upper": "0.9468869807265777616804229311"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.9398348994358871086804229310",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase II start: tile geometry",
+      "value": {
+        "lower": "0.0354086795156148255463847562",
+        "upper": "0.0354086795156148255463847563"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.0354086795156148255463847562",
+      "runtime": false,
+      "passed": true
+    },
+    {
+      "condition": "phase II final: boxes",
+      "value": {
+        "lower": "0.0070520812906906532816651618",
+        "upper": "0.0070520812906906532816651619"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0000000000000000002816651618",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase II final: residual queries",
+      "value": {
+        "lower": "0.0070520812906906532816651585",
+        "upper": "0.0070520812906906532816651586"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0000000000000000002816651585",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase II final: stored queries",
+      "value": {
+        "lower": "0.0070520812906906532816651652",
+        "upper": "0.0070520812906906532816651653"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0000000000000000002816651652",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase II final: polynomial cache",
+      "value": {
+        "lower": "0.0070520812906906532816652327",
+        "upper": "0.0070520812906906532816652328"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0000000000000000002816652327",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase II final: ordinary box encodings",
+      "value": {
+        "lower": "0.0424607608063054788280499180",
+        "upper": "0.0424607608063054788280499181"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.0354086795156148258280499180",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase II final: matrix formation",
+      "value": {
+        "lower": "0.9362493081384704817495650221",
+        "upper": "0.9362493081384704817495650222"
+      },
+      "threshold": "7052081290690653/1000000000000000000",
+      "strict_gap_lower": "0.9291972268477798287495650221",
+      "runtime": true,
+      "passed": true
+    },
+    {
+      "condition": "phase II final: tile geometry",
+      "value": {
+        "lower": "0.0354086795156148255463847562",
+        "upper": "0.0354086795156148255463847563"
+      },
+      "threshold": "0",
+      "strict_gap_lower": "0.0354086795156148255463847562",
+      "runtime": false,
+      "passed": true
+    }
+  ]
+}
