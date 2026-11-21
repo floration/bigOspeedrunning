@@ -9,3 +9,6 @@ This retunes the ideal-only threshold to U = ⌊141d³/32⌋, keeping L = 3d. Th
 
 ## Log-scale threshold: 11,232·d^17 candidate (`IdealLogScales.lean`, `chk3.py`), COMPILES (2026-11-21)
 U = ⌊30000d³/6931⌋, L = 3d. The sharp requirement for (1 + e/(U+1))^q ≤ 2 is qe/(U+1) ≤ log 2. Using 1 + x ≤ eˣ and Mathlib's bound log 2 > 0.6931471803, the budget 10000qe ≤ 6931(U+1) is enough. With the quarter envelope, the inverse gap is ≤ 32(30000/6931)⁴·d¹⁷ < 11,232·d¹⁷, and the unit branch gets half. The scope is the same as `IdealTunedScales`. It compiles against EcoDataLab @ d851f00 (2026-11-21).
+
+## Placement and build (2026-11-21)
+To build, put the four `Ideal*.lean` / `GamedTinyThreshold.lean` files in `formal/Math115/` and `QuarterAxioms.lean` in `formal/` of EcoDataLab/contingency-tables @ d851f00. All of them compiled there. `GamedTinyThreshold.lean` (2048·d^5 at U = 2) is gamed: the padding count fails at that threshold, so it's kept for reference only. See COMPARISON.md.

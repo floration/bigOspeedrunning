@@ -1,0 +1,13 @@
+import Math115.IdealQuarterRefinement
+import Math115.IdealTunedScales
+import Math115.IdealLogScales
+import Math115.GamedTinyThreshold
+#print axioms Math115.IdealQuarterRefinement.feasibleChain_poincare_d17_quarter
+#print axioms Math115.IdealQuarterRefinement.unitChain_poincare_d17_quarter
+#print axioms Math115.IdealTunedScales.tunedFeasibleChain_poincare
+#print axioms Math115.IdealTunedScales.tuned_padded_count_le_twice_original
+#print axioms Math115.IdealTunedScales.tunedUnitChain_poincare
+#print axioms Math115.IdealLogScales.logFeasibleChain_poincare
+#print axioms Math115.IdealLogScales.log_padded_count_le_twice_original
+#print axioms Math115.IdealLogScales.logUnitChain_poincare
+#print axioms Math115.GamedTinyThreshold.gamedFeasibleChain_poincare_d5
