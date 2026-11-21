@@ -10,3 +10,6 @@ These rows extend the binary-heap Dijkstra row from darkhipo/sssp-nlogn @ 1129ac
 Place `DijkstraRow*.lean` under `Submission/` next to `DijkstraRow.lean`; `Submission*.lean` export `Race.bound` (SubmissionC's second row is an `example`, for a separate submission).
 
 Credit: the model, Dijkstra/Bellman-Ford programs and most of the proof are darkhipo's. Status: Claimed.
+
+## On paper only: O(m log^{1/6} n) above C-HD's density (`five-ideas.md`)
+This extends C-HD past m ≤ n log^{3/4} n, giving T = O(n log^{b+1/6} n) at density n log^b n. It is a written argument, not built in Lean, and isn't part of any submission yet.

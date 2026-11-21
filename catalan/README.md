@@ -9,6 +9,23 @@ Problem: https://bigospeedrun.com/other/catalan. Target (verifier `challenges/ca
   (Litsey did this for 295 in verifier#187; that check ran as a multi-job chain, ~3 h Lean check alone).
 - Other: Carreira 280.59 (not formalized).
 
+## Five-idea round (2026-11-21): 269.78667 → 269.78167
+Patch [`mu-26978167.patch`](mu-26978167.patch) against `3797a70c` (supersedes the earlier two). Not yet built.
+1. **Novel (audit the certified constants for unused safety margins):** `eta295 = … − 1/1000` carries a 0.001 margin that the
+   gain inequality `η < 58²(T − log2/2) − gD` does not need (true slack 0.0010149). New `etaC = 54.688464` (margin 4.1·10⁻⁷ with
+   Mathlib's 9-digit `log 2` bounds), new lemma `Count.WinCertGlue.etaC_lt_of_gain`, `δ = 10⁻¹²`, so μ = 26978167/100000. All
+   `PayW'` inequalities rechecked in exact rationals (last margin 5·10⁻⁴).
+2. **Crazy (change the design (58,9,3,5,3) or ζ = 3/4):** μ ≈ dρ/η moves with every certificate; regenerating them is days of
+   certified computation. Not attempted.
+3. **Borrowed (interval arithmetic: tighter log 2 bounds):** the only thing between η and its ceiling 54.6884649 is the log 2
+   interval; even exact log 2 gains about 1·10⁻⁵. Not worth a change.
+4. **Reverse (start from the obstruction):** the T4 cover needs only σ ≥ 0.338704, but `sigmaC = 0.33871`. Backing σ off to
+   0.338704 would cut ρ by 3.5·10⁻⁴ and μ by about 3.4·10⁻⁴ (to ≈ 269.7813). σ feeds the polynomial-nonnegativity
+   certificates in 38 files, so this needs a full rebuild to know if they still pass. Not applied.
+5. **Breaking (break "degree ≤ 53N"):** μ is proportional to d = n0 − g0 = 53. A proof that the determinant has smaller degree
+   in the constant would be the biggest lever, but nothing in the code suggests the bound is loose. Not attempted.
+Floor for the current certificates (η at its ceiling, δ → 0): 53ρ/η_max = 269.78166.
+
 ## Final push (2026-11-20): 270 → 269.78667
 The prime-window parameter `δ` (`delta296`, was 2.9·10⁻⁷) appears only in the payment inequalities `PayW'`, and every one of them
 improves as `δ` shrinks. Setting `δ = 10⁻¹²` lowers the threshold `dρ/(η − 4dδ)` to 269.7866626, so μ = 26978667/100000 works

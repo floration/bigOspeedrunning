@@ -1,4 +1,4 @@
-# Sidorenko nondirect residual constant: 189 -> 43
+# Sidorenko nondirect residual constant: 189 -> 33
 
 Builds on rohanarun/sidorenko-template-refinements (commit 5ca68cb), `proof.tex`,
 Prop. "residual-189". Everything upstream of its remainder formula is unchanged
@@ -58,6 +58,32 @@ both A and B). It enumerates all 3^15 multiplicities exactly: **max R/d = 42.75*
 
 Hence R_d <= 43 d for every d >= 1, so -Dd + R_d <= -D + 43 once D >= 43:
 the contribution is **O_D(q^{-D+43})**, and even D >= 44 suffices for this step.
+
+## Five-ideas round (v5, v6): 43 -> 33
+* **Borrowed (generic position, algebraic geometry).** Count only bases with u_t off the
+  proper subspaces H_t∩W', H_t∩V'_a, H_t∩V'_b (still >= (q^2-4q)(q^2-q) bases per 2-space,
+  a constant-factor change). Then a pair with one defect has it at w_t, or else H_t ⊆ W'.
+  This kills most own-pair weights. Small gain.
+* **Reverse (count from the end).** For a (0,1,1) vector y, w'(y) = k - #(later g=1 vectors),
+  while y's pi-weight goes only to *later* non-defect vectors. So
+  w'(y) + weight(y) <= k + n0 (+1 own-partner case) = 2m - n1 - n2 (+1).
+  The old proof paid for "y is late" (w' ≈ k) and "y is early" (many later neighbours) at once.
+  Same trick at a vertex for (0,0,1) new at b: v'_b(y) + weight(y) <= 2δ_b - 1, so a (0,0,1)
+  costs <= 2δ_a + 2δ_b - 1 <= 23 per defect unit.
+  `audit_rank_refinement_v5.py` (exact DP, all m, n1, n2): R/d <= 33.5. `tradeoff_check.py`
+  tests the inequality on 12,437 random (0,1,1) vectors over GF(3), with no violations.
+* **Novel (combined exact solve).** v5 plus the distinct-local-dimension saving, solved by exact
+  branch and bound over all multiplicities on the 28 pairs (`audit_rank_refinement_v6.py`):
+  (0,1,1)-only strata give **R/d <= 32.75** (n2 = 4 on {1,3},{1,9}x2,{3,11}), and (0,0,1)
+  vectors cost <= 33 (<= 23 with the vertex trade-off). So R_d <= 33 d.
+* **Crazy (symplectic count inside W').** Make the (0,1,1) count q^{dim W'∩(V'_a+V'_b)^⊥}
+  instead of q^{w'}. This fails: W' can be degenerate, so no dimension drop can be proved.
+* **Breaking (drop the fixed pair order).** Choosing the order per configuration is legal
+  (a finite partition), but the relaxation then has no clean max-min form. After the
+  reverse trick the bound barely depends on the order, so I didn't pursue it.
+
+Result: -Dd + R_d <= -D + 33 for every d >= 1 once D >= 33, so the contribution is
+**O_D(q^{-D+33})**, and even D >= 34 suffices for this step.
 
 ## Caveats
 * Inherits the "Claimed" status of the 189 argument: no Lean proof, upstream sequential

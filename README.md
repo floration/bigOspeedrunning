@@ -6,14 +6,14 @@ Claimed improvements to bounds listed on https://bigospeedrun.com. They aren't L
 |---|---|---|---|---|
 | Binary polynomial multiplication over F2 | kappa = 2/2599 (1/1299.5) | 1/1302 | Csizmadia, arpcs/finite-field-polynomial-multiplication v0.2.1 | `binary-polymul/` (moment checks, incl. interval check) |
 | Van der Waerden lower bound | c = 1249/10000 | 1/9 | DaysSky, commit 987c96c | `van-der-waerden/` (parameter inequalities + sp_check.py) |
-| Catalan's constant, irrationality measure | mu(G) <= 269.78667 | 270 | S. Litsey, slitsey/catalan-irrationality-measure @ 3797a70c | `catalan/` (Lean patch, not built yet) |
+| Catalan's constant, irrationality measure | mu(G) <= 269.78167 (build pending; 269.78667 patch also included) | 270 | S. Litsey, slitsey/catalan-irrationality-measure @ 3797a70c | `catalan/` (Lean patch, not built yet) |
 | One-sample matroid prophet inequality | C = 5.168434e-10 (max-branch coin decoupled from t; earlier 5.168131e-10, 5.11658e-10) | 5.11494e-10 | Chen; darkhipo | `matroid-prophet/` (exact-rational `certify_final_tau.py`, PASS) |
-| Sidorenko nondirect residual constant | C <= 43 | 189 | rohanarun/sidorenko-template-refinements @ 5ca68cb | `sidorenko/` (new rank lemma, exact-rational audit) |
+| Sidorenko nondirect residual constant | C <= 33 | 189 | rohanarun/sidorenko-template-refinements @ 5ca68cb | `sidorenko/` (new rank lemma, exact-rational audit) |
 | Unit-distance obstruction, selected edges | 29 (6×5 grid minus one edge) | 32 (8×4) | Rohan Arun; OpenAI power-saving paper @ fd4aeeb2 | `unit-distance-grid/` (proof draft + check_grid.py, check_29.py; same imported lemmas) |
 | Heilbronn triangle problem (eta) | 1/39,569,962 (~2.527e-8) | ~1.98e-8 | Blinov, littleBro/heilbronn-triangle-bounds PR #13 @ e29a291 | `heilbronn/` (smaller 3-AP-free packing + verify scripts) |
 | Subset Sum threshold T | 0.4875739537 | 0.4875755 | Jennifer Voitle, jv1000/subset-sum @ 38e5335 | `subset-sum/` (tightened slack constants + certify scripts) |
-| Contingency tables (FPRAS repair coefficient) | 12,062·d^17 (both Lean files compile) | 80,000·d^17 | Upstream Math115 PhysicalRepairRefinement development | `contingency-tables/` (Lean refinement + chk.py) |
-| Directed SSSP gap-fill rows | e.g. n log^{15/8} n at m <= n log^{7/8} n; n log^3 n at m <= n log^2 n; n^{3/2} log n at m <= n^{3/2} | n log^2 n / n^2 / n^2 (Lean Verified) | darkhipo/sssp-nlogn @ 1129aca | `directed-sssp/` (Lean, builds with no sorry) |
+| Contingency tables (FPRAS repair coefficient) | 12,062·d^17 (both Lean files compile); 11,232·d^17 candidate, build pending | 80,000·d^17 | Upstream Math115 PhysicalRepairRefinement development | `contingency-tables/` (Lean refinement + chk.py) |
+| Directed SSSP gap-fill rows | e.g. n log^{15/8} n at m <= n log^{7/8} n; n log^3 n at m <= n log^2 n; n^{3/2} log n at m <= n^{3/2} | n log^2 n / n^2 / n^2 (Lean Verified) | darkhipo/sssp-nlogn @ 1129aca | `directed-sssp/` (Lean, builds with no sorry; plus a paper-only O(m log^{1/6} n) extension of C-HD) |
 | Integer multiplication (kappa, conditional) | kappa >= 0.00387992804606 | 0.00387992803556 (#7830) | CrocSwap/integer-mult-bounds P104 mixed-cutoff BIT supplier (#7830) | `integer-multiplication/` (verify.py replay + independent review) |
 | Haldane gap (spin-one Heisenberg chain) | gamma_L > 0.151707 for L >= 24 | 0.1515 | amachino/haldane-gap-refinement v1.7 @ 15909bdc | `haldane-gap/` (sharper tail invariant, exact receipt) |
 

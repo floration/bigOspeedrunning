@@ -6,3 +6,6 @@
 
 ## Retuned scales: 12,062·d^17 (`IdealTunedScales.lean`, `chk2.py`)
 This retunes the ideal-only threshold to U = ⌊141d³/32⌋, keeping L = 3d. That's the smallest threshold of this form that the existing padding-count budget 47(gL)e ≤ 32(U+1) allows. Combined with the quarter envelope above, the inverse-gap allowance becomes (141⁴/32³)·d¹⁷ < 12,063·d¹⁷, and the unit branch gets half of that. Scope: this proves the actual-chain Poincaré bound and the padding count at the new scales. The later completion-program and sampler modules are instantiated only at U = 5d³ and aren't re-proved here. `IdealTunedScales.lean` also compiles against EcoDataLab/contingency-tables @ d851f00 (built 2026-11-21).
+
+## Log-scale threshold: 11,232·d^17 candidate (`IdealLogScales.lean`, `chk3.py`), BUILD PENDING
+U = ⌊30000d³/6931⌋, L = 3d. The sharp requirement for (1 + e/(U+1))^q ≤ 2 is qe/(U+1) ≤ log 2. Using 1 + x ≤ eˣ and Mathlib's bound log 2 > 0.6931471803, the budget 10000qe ≤ 6931(U+1) is enough. With the quarter envelope, the inverse gap is ≤ 32(30000/6931)⁴·d¹⁷ < 11,232·d¹⁷, and the unit branch gets half. The scope is the same as `IdealTunedScales`. Until this builds, the claimed value stays at 12,062·d¹⁷.
