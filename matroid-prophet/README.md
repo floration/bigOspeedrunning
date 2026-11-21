@@ -110,3 +110,15 @@ so this is the ceiling of the chain.
   the tilt p^μ ≈ a·v/(3ρ).
 - **Breaking, non-uniform phase law:** dead. Minimax over cyclic shifts makes the
   uniform phase optimal for worst-case rounding.
+
+## Max gamified vs as intended (Nov 21)
+
+| Version | What may change | C | vs board |
+|---|---|---|---|
+| **As intended** (`certify_as_intended.py`) | Nothing in the algorithm. Only proof-internal steps are tightened (exact logs, α₁ direct, 1/p, d → λ) and the analysis constants are re-optimised | 5.1168092217·10⁻¹⁰ | +0.0366 % |
+| **Max gamified** (`certify_final_tau.py`) | Every free number: mask rates ρ, h, t, phase grid L = 2²⁴ with L(θ−1) ≈ 4.933, decoupled max-branch coin τ, more seed bits | 5.1684343637·10⁻¹⁰ | +1.0459 % |
+
+The max-gamified value sits at its ceiling. The float optimum with L = 2³² and κ re-searched
+over 163–165 is 5.1684351·10⁻¹⁰, which differs by 1.5·10⁻⁷ relative. Almost all of the
++1 % comes from the finer phase grid, which replaces the factor 1/5 with roughly 1/ln B.
+That is a genuine re-instantiation of the same construction, not a different theorem.

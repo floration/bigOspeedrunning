@@ -38,3 +38,28 @@ eps = eps_reg = delta = 1/100000, delta_s = 1/2.
 - All five rejection controls (b=a, m=2a, c=gamma*b/2, gamma at bound, c=1/8) are rejected.
 - c = 0.12499 fails with these margins. Going further only means smaller margins; 1/8 itself is unreachable.
 Same caveats as above: parameter tuning only, on unreviewed lemmas.
+
+## Five-ideas round (2026-11-21). Heuristic only, no new certified bound
+Reading of the bottleneck: N = k^{c k log2 r}, a rich progression has probability about k^{-gamma*b*k*log2 r},
+and a union bound over the ~N^2 progressions in [N] gives 2c < gamma*b. The "2" is the progression count.
+1. Novel: replace the union bound on rich events by the Lovasz local lemma (each event then pays ~kN, not N^2),
+   which would turn 2c < gamma*b into c < gamma*b, i.e. c < 1/4. Obstacle: rich events are driven by shared random
+   keys, so the dependency degree may itself be ~N^2. Best lead; needs short-period-runs-proof.md to test.
+2. Crazy: push gamma past 1/2 with an unbalanced or multi-colour outer colouring. Dead: gamma is the minority-colour
+   fraction, which is at most 1/2 for two colours, and less for more colours.
+3. Borrowed (coding theory): treat the key word as a code. b < a < 1/2 is a rate limit from 2a < m < 1 (again a
+   pair count). A Gilbert-Varshamov style expurgation (delete bad keys, don't union-bound them) could relax 2a < m
+   to a < m, allowing b up to ~1. Unchecked; same blocker as idea 1.
+4. Reverse: from the target down. Nothing known caps c at 1/8 or even 1 (upper bounds on W are tower-type), so 1/8
+   is a method barrier only. Getting 1/4 needs exactly one factor-2 saving (idea 1 or 3); getting 1/2 needs both.
+5. Breaking: drop the floor(log2 r) binary-digit encoding and colour with r colours directly. For r = 2^j it gives the
+   same exponent; for r between powers of 2 it only helps the floor, not c. No gain under this scoring.
+
+## Two versions (2026-11-21)
+MAX GAMIFIED: c = 1/8 - 10^-11 = 0.12499999999.
+  a = 1/2 - t, m = 1 - t, b = 1/2 - 2t, gamma = 1/2 - 4t, eps = eps_reg = delta = t = 10^-12, delta_s = 1/2.
+  Passes all 16 short-period checks in sp_check.py (margin gamma*b/2 - c = 8.5e-12). Any c < 1/8 can be dialled in
+  the same way; 1/8 itself is rejected by the script.
+AS INTENDED: no new result. The site already credits DaysSky's region as "every fixed c < 1/8"; picking a larger c
+  inside it is not new math and still rests on DaysSky's unreviewed lemmas. Honest standing: 1/9 Claimed (DaysSky),
+  1/100000 Lean Verified (OpenAI). A real gain needs a new argument, e.g. the local-lemma idea (would give < 1/4).
