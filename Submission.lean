@@ -1,14 +1,8 @@
 import Submission.SsspStatement
-import Submission.DijkstraRow
+import Submission.DijkstraRowC
 
-/-!
-The `n·log n ; n·log² n` row for the Big O Speedrun directed shortest paths race: one uniform
-program (dispatching on `m/n` against `⌊log₂ n⌋`: the fork's verified Bellman–Ford on dense
-graphs, a binary-heap Dijkstra on sparse ones) is exact on every graph, runs within
-`C·n·(log n)²` at `m ≤ n·⌊log₂ n⌋` for `n ≥ 16`, and within `C·(n+1)(m+1)` on every graph.
--/
-
+-- Row `n^3/2 ; n^3/2 log` (Family B, a = 3/2).
 theorem Race.bound :
-    BigOSpeedrun.DirectedSSSP.Bound ((1 : ℚ) / 1) ((1 : ℚ) / 1) ((1 : ℚ) / 1) ((2 : ℚ) / 1)
+    BigOSpeedrun.DirectedSSSP.Bound ((3 : ℚ) / 2) ((0 : ℚ) / 1) ((3 : ℚ) / 2) ((1 : ℚ) / 1)
       ((0 : ℚ) / 1) :=
-  Submission.DijkstraRow.dijkstra_bound
+  Submission.DijkstraRowC.dijkstra_bound_poly _ (by norm_num) (by norm_num)
