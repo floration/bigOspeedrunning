@@ -19,6 +19,7 @@ Claimed improvements to bounds listed on https://bigospeedrun.com. They aren't L
 | Average sensitivity of PTFs | As intended: C = 476765550/149384251 (Lean built, standard axioms, `verified/`). Max gamified: 353514424368353/110766156451452 (build pending) | 90295/28292 (Lean Verified, verifier#93) | darkhipo/average-sensitivity-lean @ 78fe0e6 | `average-sensitivity/` |
 | APSP exponent | Lean, c = 502/25: 2.9955607132692 (passed Lean verify.py on 2026-11-21). Gamed, c = 1807/90: ~2.99556071322463 (build pending). Claimed, max gamified: 2.99294791870930934671834 | 2.9955607647814 (LV) / 2.9929479187094 (Claimed) | Li Xuanji; shreshth-s / Wharton | `apsp/` |
 | Z is Diophantine in Q (fewest variables, quartic) | 179 variables, degree 4, 2,841 terms (a re-encoding of Brox's 179 that wins the term-count tiebreak; no new mathematics) | 257 listed; 179 already public (Jose Brox) | Jose Brox, Conant, and the Z-in-Q project (JoseBrox/diophantine-z-q_improvements @ 4bdace6) | `z-diophantine-in-q/` (exact verify_gamed.py) |
+| Simple zeros on the critical line (kappa*) | kappa* >= 0.6733975 (window cos(1.5t); certified finite step, unrefereed argument) | 0.6731134 (Bhattacharjee–Bhattacharya v1.0.0) | Bhattacharjee–Bhattacharya, creelie/mh-phys 1.3.0; Alpöge–Furman's method and verifier | `critical-line-zeros/` |
 
 ## Caveats
 - "Gamed" marks values that stretch how the metric is read (free parameters, partial edge counts, gap-fill densities). They're kept here for reference, but the as-intended values are the ones claimed.
