@@ -85,6 +85,17 @@ the contribution is **O_D(q^{-D+43})**, and even D >= 44 suffices for this step.
 Result: -Dd + R_d <= -D + 33 for every d >= 1 once D >= 33, so the contribution is
 **O_D(q^{-D+33})**, and even D >= 34 suffices for this step.
 
+## Two readings of the metric
+* **As intended (the 189 entry's convention, "O(q^{-D+C}) for D >= C"): C = 33.**
+* **Max gamified: C = 11, valid for D >= 55.** The board only records C. With d = 1 there
+  is a single (0,0,1) vector y at pair (a,b), new at b. Then
+  R_1 <= -2m + (m-1) + [v'_b(y) + weight(y)] + v'_a(y) <= -m - 1 + (2δ_b - 1) + 2δ_a
+  = 2s - 2 - m <= s - 1 <= 11, using the vertex trade-off and m >= s - 1.
+  The d >= 2 strata (R_d <= 32.75 d) are pushed into the threshold:
+  -Dd + R_d <= -D + 11 once (d-1)D >= 32.75d - 11, i.e. D >= 54.5. So O_D(q^{-D+11}) for D >= 55.
+  This is a true statement, but it moves the cost from C into the threshold D0.
+  A softer gamed figure is the non-integer C = 32.75 at D >= 33.
+
 ## Caveats
 * Inherits the "Claimed" status of the 189 argument: no Lean proof, upstream sequential
   framework not independently reviewed by us beyond re-deriving its remainder identity.

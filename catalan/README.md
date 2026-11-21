@@ -9,6 +9,15 @@ Problem: https://bigospeedrun.com/other/catalan. Target (verifier `challenges/ca
   (Litsey did this for 295 in verifier#187; that check ran as a multi-job chain, ~3 h Lean check alone).
 - Other: Carreira 280.59 (not formalized).
 
+## Two versions (2026-11-21)
+| Version | μ(G) ≤ | What it does |
+|---|---|---|
+| **Max gamified** | **269.7816584** | [`mu-2697816584-gamified.patch`](mu-2697816584-gamified.patch): every free numeric knob pushed to the edge of what Lean can still certify. δ = 10⁻³⁰; η = 54.68846441 (3.6·10⁻⁹ under the ceiling set by Mathlib's 9-digit log 2 bounds); μ is the 7-decimal rational just above dρ/(η − 4dδ) = 269.78165832. Not built. |
+| **As intended** | **269.78167** | [`mu-26978167.patch`](mu-26978167.patch): the same idea with round, comfortable margins (η = 54.688464, δ = 10⁻¹², μ = 269.78167). Rebuild queued on the PC. |
+| Honest reading of the race | 270 → ~269.78 is bookkeeping | Neither version adds mathematics. Both only remove rounding and safety margins from Litsey's proof. A real improvement needs new certified estimates for ρ or η. |
+
+The gap between the two versions is 1.2·10⁻⁵. Exact log 2 would gain a further 2·10⁻⁶ (ceiling 269.7816561), using a 10-digit log 2 lemma.
+
 ## Five-idea round (2026-11-21): 269.78667 → 269.78167
 Patch [`mu-26978167.patch`](mu-26978167.patch) against `3797a70c` (supersedes the earlier two). Not yet built.
 1. **Novel (audit the certified constants for unused safety margins):** `eta295 = … − 1/1000` carries a 0.001 margin that the

@@ -66,3 +66,22 @@ With the tail now essentially lossless (C → 2), the certified rate equals the 
 ## Status
 
 Unreviewed and conditional on the same OpenAI premises and finite inputs as v1.7. There is no Lean proof, so it would be listed as Claimed. The tail lemma above was written in this thread and has not been independently reviewed.
+
+## Two versions of the claim
+
+| Version | Claim | How |
+|---|---|---|
+| As intended | γ_L > 0.151707 for all L ≥ 24 | Default `TARGET`; a round 6-digit constant from the new tail lemma |
+| Max gamified | γ_L > 0.151707452 for all L ≥ 24 | `TARGET=151707452/1000000000` passes, and ...453 fails. Receipt: `quarter_refinement_0151707452_gamified.json` |
+
+Both are the same exact certificate; the gamified one only squeezes the last digits up to the recurrence limit −log(2q₉)/b₉ ≈ 0.1517074527. Restricting to the board domain (even L ≥ 2304) gains nothing, because the tail, not the short lengths, binds.
+
+## Five-ideas sweep (2026-11-21, diagnostics are non-rigorous)
+
+The certified rate is set almost entirely by the 84-site seed: −log(2q)/b is 0.1616 at the seed and settles to 0.15171 after two rows. Halving the seed's thermal defect q would give about 0.173 (diagnostic).
+
+1. **Novel: re-seed partway up.** At row 1 or 2, take the minimum of the propagated bounds and a fresh finite-data seed. Best case +0.0000006 (m = 22 or 26 at row 1). Row 2 fails dominance. Not worth it; it would also need a new 168-site trial.
+2. **Crazy: other reference lengths and temperatures.** The seed n ranged over 32–60, t over 7/4–5/2, and m over 20–38. n = 42, t = 2, m = 26 stays optimal (n = 44 gives 0.1512, n = 40 gives 0.1504, n = 60 gives 0.130).
+3. **Borrowed: Christoffel / Gauss–Radau optimality** (orthogonal polynomials). Solving U⁴ v(U)ᵀ H⁻¹ v(U) = 1 for the moment Hankel matrix H reproduces the upstream caps (A 1.000798, B .43165, E .69930, V .71706). The quartic filters are already optimal for moments up to 12, so there is no slack there.
+4. **Reverse: from target to inputs.** With every check disabled, the A-sector top-eigenvalue cap drives everything. A cap of 1.0006 instead of 1.0008 would give about 0.172, and 1.0004 about 0.18 (unverified diagnostics). The other three sector supports matter far less.
+5. **Breaking: moments past order 12.** This breaks the assumption that thermal traces stop at L = 12. The upstream C++ engine takes 1.0 s, 5.9 s and 50 s for L = 9, 10 and 11 on 4 CPUs (about 8.5× per length). That puts L = 13 at about 1 h per twist (about 4 h for all four twists) and L = 14 at about 8.5 h per twist (about 34 h). A tighter A cap needs even moments (14, 16). It would also need regenerating the 8 filters and 117 polynomial certificates at higher degree, and checking 256-bit overflow in the engine. This is the only route found that could move the bound materially, but it is a multi-day project.

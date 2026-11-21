@@ -1,0 +1,126 @@
+diff --git a/CatalanMeasure/GenD/Signed/Count/WinCertGlue.lean b/CatalanMeasure/GenD/Signed/Count/WinCertGlue.lean
+index 60c9d842..16dd286d 100644
+--- a/CatalanMeasure/GenD/Signed/Count/WinCertGlue.lean
++++ b/CatalanMeasure/GenD/Signed/Count/WinCertGlue.lean
+@@ -112,6 +112,14 @@ theorem eta295_lt_of_gain {gain : ℝ} (h : (220607 / 10000 : ℝ) ≤ gain) :
+   norm_num [K590.target, D58.lo, D58.hi] at hl hh h ⊢
+   linarith
+ 
++/-- **`eta_le`** for `etaC`: `etaC < tΔ - gD`. -/
++theorem etaC_lt_of_gain {gain : ℝ} (h : (220607 / 10000 : ℝ) ≤ gain) :
++    RouteI.etaC < 58 ^ 2 * (RouteI.T296 - Real.log 2 / 2) - gDg gain := by
++  obtain ⟨hl, hh⟩ := D58.log2_bounds
++  unfold gDg RouteI.etaC RouteI.T296 RouteI.shift296
++  norm_num [K590.target, D58.lo, D58.hi] at hl hh h ⊢
++  linarith
++
+ end
+ end CatalanMeasure.GenD.Signed.Count.WinCertGlue
+ #print axioms CatalanMeasure.GenD.Signed.Count.WinCertGlue.wincert_count
+diff --git a/CatalanMeasure/GenD/Signed/RouteI/Literals.lean b/CatalanMeasure/GenD/Signed/RouteI/Literals.lean
+index c5066566..2332cb8e 100644
+--- a/CatalanMeasure/GenD/Signed/RouteI/Literals.lean
++++ b/CatalanMeasure/GenD/Signed/RouteI/Literals.lean
+@@ -25,7 +25,10 @@ def cost296 : ℝ := 3596893 / 1000000 + sigma296
+ def psi296 : ℝ := 50111339578 / 1000000000
+ def rho296 : ℝ := 58 * cost296 + psi296
+ def alpha296 : ℝ := 51 / 500
+-def delta296 : ℝ := 29 / 100000000
++def delta296 : ℝ := 1 / 10 ^ 30
++/-- The decay rate used by the 270-route terminal: `eta295` without its `1/1000` margin, kept to
++`4·10⁻⁹` (the gain inequality holds with margin `3.6·10⁻⁹` using Mathlib's 9-digit bounds on `log 2`, `Count.WinCertGlue.etaC_lt_of_gain`). -/
++def etaC : ℝ := 5468846441 / 100000000
+ 
+ theorem rho296_eq : rho296 = (139171704799 / 500000000 : ℝ) := by
+   norm_num [rho296, cost296, sigma296, psi296]
+diff --git a/CatalanMeasure/GenD/Signed/RouteI/Measure270.lean b/CatalanMeasure/GenD/Signed/RouteI/Measure270.lean
+index cacc075d..b2e100c1 100644
+--- a/CatalanMeasure/GenD/Signed/RouteI/Measure270.lean
++++ b/CatalanMeasure/GenD/Signed/RouteI/Measure270.lean
+@@ -416,7 +416,28 @@ theorem catalan_irrationalityMeasure_270 :
+         |(∑' j : ℕ, (-1 : ℝ) ^ j / ((2 * j + 1 : ℕ) : ℝ) ^ 2) - a / b| :=
+   measure_270 firstData largeData nearData HCirc.hcirc_d HCirc.hseg_d
+ 
++/-- **μ(G) ≤ 269.7816584.** The terminal `measure_of_data` holds for every rational `μ ≥ 269.7816584`
++(its last condition is `μ > dρ/(η − 4dδ)`, which is `269.78165832…` at `δ = 10⁻³⁰`, `η = etaC`). -/
++theorem catalan_irrationalityMeasure_2697816584 :
++    ∀ᶠ b : ℕ in atTop, ∀ a : ℤ,
++      (b : ℝ) ^ (-(((2697816584 / 10000000 : ℚ)) : ℝ)) <
++        |(∑' j : ℕ, (-1 : ℝ) ^ j / ((2 * j + 1 : ℕ) : ℝ) ^ 2) - a / b| :=
++  measure_of_data (2697816584 / 10000000) (by norm_num) (by norm_num) firstData largeData nearData
++    HCirc.hcirc_d HCirc.hseg_d
++
++/-- The race form: for every real `s > 269.7816584`, eventually `b^(-s) < |G - a/b|`. -/
++theorem catalan_upperBound_2697816584 :
++    ∀ s : ℝ, ((2697816584 / 10000000 : ℚ) : ℝ) < s →
++      ∀ᶠ b : ℕ in atTop, ∀ a : ℤ,
++        (b : ℝ) ^ (-s) < |(∑' j : ℕ, (-1 : ℝ) ^ j / ((2 * j + 1 : ℕ) : ℝ) ^ 2) - a / b| := by
++  intro s hs
++  filter_upwards [catalan_irrationalityMeasure_2697816584, eventually_ge_atTop 1] with b hb hb1 a
++  refine lt_of_le_of_lt ?_ (hb a)
++  have h1 : (1 : ℝ) ≤ b := by exact_mod_cast hb1
++  exact Real.rpow_le_rpow_of_exponent_le h1 (by linarith)
++
+ end
+ end CatalanMeasure.GenD.Signed.RouteI.Measure270
+ 
+ #print axioms CatalanMeasure.GenD.Signed.RouteI.Measure270.catalan_irrationalityMeasure_270
++#print axioms CatalanMeasure.GenD.Signed.RouteI.Measure270.catalan_upperBound_2697816584
+diff --git a/CatalanMeasure/GenD/Signed/RouteI/SigmaC.lean b/CatalanMeasure/GenD/Signed/RouteI/SigmaC.lean
+index 22b0b489..62e4c968 100644
+--- a/CatalanMeasure/GenD/Signed/RouteI/SigmaC.lean
++++ b/CatalanMeasure/GenD/Signed/RouteI/SigmaC.lean
+@@ -24,12 +24,12 @@ theorem rhoC_eq : rhoC = (139188156789 / 500000000 : ℝ) := by
+   norm_num [rhoC, costC, sigmaC, psi296]
+ 
+ /-- **Payment at an exponent `B`** with `rhoC`: the six real inequalities of `PayW'` hold for every
+-`B` in `[269.787, 400]` (lower end: the root `269.78697` of `53 ρ + 212 δ B = η B`). -/
+-theorem pay_designC {B : ℝ} (hB1 : (269787 / 1000 : ℝ) ≤ B) (hB2 : B ≤ 400) :
+-    PayW' (3/5) (dc58.d0 : ℝ) rhoC eta295 (B/rhoC) delta296 B := by
++`B` in `[269.7816584, 400]` (lower end: the root `269.78165832` of `53 ρ + 212 δ B = η B` at `δ = 10⁻³⁰`, `η = etaC`). -/
++theorem pay_designC {B : ℝ} (hB1 : (2697816584 / 10000000 : ℝ) ≤ B) (hB2 : B ≤ 400) :
++    PayW' (3/5) (dc58.d0 : ℝ) rhoC etaC (B/rhoC) delta296 B := by
+   have hr : rhoC = (139188156789 / 500000000 : ℝ) := rhoC_eq
+-  have he : eta295 = (1093749 / 20000 : ℝ) := eta295_eq
+-  apply Signed.Generic.payB' dc58 (3/5) rhoC eta295 delta296 B
++  have he : etaC = (5468846441 / 100000000 : ℝ) := by norm_num [etaC]
++  apply Signed.Generic.payB' dc58 (3/5) rhoC etaC delta296 B
+   all_goals norm_num [hr, he, delta296, dc58_d0]
+   all_goals linarith [hB1, hB2]
+ 
+diff --git a/CatalanMeasure/GenD/Signed/RouteI/TerminalC.lean b/CatalanMeasure/GenD/Signed/RouteI/TerminalC.lean
+index cc1ea2c7..ba09944e 100644
+--- a/CatalanMeasure/GenD/Signed/RouteI/TerminalC.lean
++++ b/CatalanMeasure/GenD/Signed/RouteI/TerminalC.lean
+@@ -868,7 +868,7 @@ theorem hweights_d
+ 
+ /-- **The terminal on the interval nodes** (GP Theorem 10.1): the three sheet bounds with `ζ = 3/4`,
+ `δ̂ = δc`, target `T296` and cost `58 costC`, plus (hcirc) and (hseg), give `μ(G) ≤ μ`. -/
+-theorem measure_of_sheets (μ : ℚ) (hμ1 : (269787 / 1000 : ℝ) ≤ μ) (hμ2 : (μ : ℝ) ≤ 400)
++theorem measure_of_sheets (μ : ℚ) (hμ1 : (2697816584 / 10000000 : ℝ) ≤ μ) (hμ2 : (μ : ℝ) ≤ 400)
+     (hcirc : ∀ z : ℂ, ‖z‖ = 3 / 4 →
+       ((dc58.toParameters.h0 + dc58.toParameters.q0 : ℕ) : ℝ) * Real.log ‖(1 : ℂ) - z‖ +
+         ivlL ivlLo ivlHi z ≤ 32506 / 10000)
+@@ -885,8 +885,8 @@ theorem measure_of_sheets (μ : ℚ) (hμ1 : (269787 / 1000 : ℝ) ≤ μ) (hμ2
+   obtain ⟨lbC, gain, hg, hc⟩ := Count.LedgerContent.content
+   have hpay := pay_designC (B := (μ : ℝ)) hμ1 hμ2
+   exact catalan_irrationalityMeasure_of_nodes_C (tauI ivlLo ivlHi) Gd tauI_injective_data tauI_mem_data
+-    tauI_ne_zero_data hsupport_d _ μ eta295 _ alpha296 (3 / 4) 1 δc (by norm_num) zero_le_one hpay
+-    hc (Count.WinCertGlue.eta295_lt_of_gain hg) hfirst hnear hlarge (hweights_d hcirc hseg)
++    tauI_ne_zero_data hsupport_d _ μ etaC _ alpha296 (3 / 4) 1 δc (by norm_num) zero_le_one hpay
++    hc (Count.WinCertGlue.etaC_lt_of_gain hg) hfirst hnear hlarge (hweights_d hcirc hseg)
+ 
+ 
+ theorem ivl_P_nat : (List.range 106).all (fun i =>
+@@ -1146,9 +1146,9 @@ theorem NearData.sheet (D : NearData) (Nd : ∀ (N m : ℕ), (Fin m → ℝ) →
+     D.B' D.hAB D.hA0 D.hB1 D.hcovP D.Δ D.hΔ0 D.nC D.fC D.rs D.np D.F0 D.U D.FU D.p2 D.du2 D.s D.s' D.hF0
+     D.hPW D.hPφ D.hPω D.Rp D.hNp D.hFp D.hSp D.hp2p D.hs D.hs' D.hole
+ 
+-/-- **μ(G) ≤ μ for any rational `μ ∈ [269.787, 400]`, from the data records.**  The stated value of the
++/-- **μ(G) ≤ μ for any rational `μ ∈ [269.7816584, 400]`, from the data records.**  The stated value of the
+ design is `μ = 270`. -/
+-theorem measure_of_data (μ : ℚ) (hμ1 : (269787 / 1000 : ℝ) ≤ μ) (hμ2 : (μ : ℝ) ≤ 400)
++theorem measure_of_data (μ : ℚ) (hμ1 : (2697816584 / 10000000 : ℝ) ≤ μ) (hμ2 : (μ : ℝ) ≤ 400)
+     (F : FirstData) (Lg : LargeData) (Nr : NearData)
+     (hcirc : ∀ z : ℂ, ‖z‖ = 3 / 4 →
+       ((dc58.toParameters.h0 + dc58.toParameters.q0 : ℕ) : ℝ) * Real.log ‖(1 : ℂ) - z‖ +
