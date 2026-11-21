@@ -31,3 +31,7 @@ Integer c = 20 is the best integer. But the paper's machinery already uses L = �
 
 Expected result: about **2.99556071 to 2.995560714**, which beats the Lean Verified record by about 5e-8. That is roughly 40 times the last Lean step.
 The work: change `oL` to ⌈(a/b)·m⌉ in the word-RAM program (the same ceil-div pattern `oT` already uses), retune θ and σ, re-prove the log enclosures in Numbers.lean for the new rationals, update every constant in the 17 files the earlier retunes touched plus the `oL`/`N₀` uses, then rebuild and verify. Not yet attempted. The scan script is `lean_track_c_scan.py`.
+
+## Lean build results (2026-11-21)
+- c = 502/25, a retune of Li Xuanji's Lean proof (`lean-fractional-c/`). It passed the verifier's Lean `verify.py` on q's PC with exponent 2.9955607132692. That beats the Lean Verified record of 2.9955607647814.
+- c = 1807/90 (`lean-1807-90/`, gamed): build running.
