@@ -12,8 +12,8 @@ Problem: https://bigospeedrun.com/other/catalan. Target (verifier `challenges/ca
 ## Two versions (2026-11-21)
 | Version | μ(G) ≤ | What it does |
 |---|---|---|
-| **Max gamified** | **269.7816584** | [`mu-2697816584-gamified.patch`](mu-2697816584-gamified.patch): every free numeric knob pushed to the edge of what Lean can still certify. δ = 10⁻³⁰; η = 54.68846441 (3.6·10⁻⁹ under the ceiling set by Mathlib's 9-digit log 2 bounds); μ is the 7-decimal rational just above dρ/(η − 4dδ) = 269.78165832. Not built. |
-| **As intended** | **269.78167** | [`mu-26978167.patch`](mu-26978167.patch): the same idea with round, comfortable margins (η = 54.688464, δ = 10⁻¹², μ = 269.78167). Rebuild queued on the PC. |
+| **Max gamified** | **269.7816584** | [`mu-2697816584-gamified.patch`](mu-2697816584-gamified.patch): every free numeric knob pushed to the edge of what Lean can still certify. δ = 10⁻³⁰; η = 54.68846441 (3.6·10⁻⁹ under the ceiling set by Mathlib's 9-digit log 2 bounds); μ is the 7-decimal rational just above dρ/(η − 4dδ) = 269.78165832. Built OK 2026-11-21 (axioms clean). |
+| **As intended** | **269.78167** | [`mu-26978167.patch`](mu-26978167.patch): the same idea with round, comfortable margins (η = 54.688464, δ = 10⁻¹², μ = 269.78167). Built OK 2026-11-21 (axioms clean). |
 | Honest reading of the race | 270 → ~269.78 is bookkeeping | Neither version adds mathematics. Both only remove rounding and safety margins from Litsey's proof. A real improvement needs new certified estimates for ρ or η. |
 
 The gap between the two versions is 1.2·10⁻⁵. Exact log 2 would gain a further 2·10⁻⁶ (ceiling 269.7816561), using a 10-digit log 2 lemma.
@@ -40,7 +40,7 @@ The prime-window parameter `δ` (`delta296`, was 2.9·10⁻⁷) appears only in 
 improves as `δ` shrinks. Setting `δ = 10⁻¹²` lowers the threshold `dρ/(η − 4dδ)` to 269.7866626, so μ = 26978667/100000 works
 (margin in the last inequality: 4·10⁻⁴, exact rationals). Patch: [`mu-26978667.patch`](mu-26978667.patch) (supersedes the 269.787 one).
 This is the floor for the current numbers: `dρ/η = 269.786662564`. Anything lower needs a new η or ρ.
-Build check running on the user's computer (Remote Control), result pending.
+**Built 2026-11-21 on the user's PC: success (5093 jobs, Lean v4.35.0-rc2). `catalan_upperBound_26978667` uses only propext, Classical.choice, Quot.sound.**
 
 ## First pass: 270 → 269.787
 `CatalanMeasure/GenD/Signed/RouteI/TerminalC.lean:1148` already proves `measure_of_data (μ : ℚ)` for every
@@ -61,6 +61,5 @@ network policy), and a full build of this repo takes hours. Gain beyond 269.787 
 - Real progress (e.g. < 260): hard. Needs a better design / sharper corank profile (η) or energy bound (ρ); each piece is a large
   certified computation in Lean.
 
-## Build status (2026-11-21)
-- 269.78667 (`mu-26978667.patch`): full Lean build passes, standard axioms only.
-- 269.78167 and 269.7816584 (gamified): builds running.
+## Build status (2026-11-21, final)
+All three patches (269.78667, 269.78167, gamified 269.7816584) build clean on Lean v4.35.0-rc2 against 3797a70c, with standard axioms only. The verifier's Lean Verified tier pins v4.34.1, so these stay Claimed until they're backported.
