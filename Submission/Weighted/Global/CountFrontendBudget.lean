@@ -381,7 +381,7 @@ theorem all_prefix_time_bound {K k m b C A degree : ℕ}
 
 def frontendExponent : ℝ :=24003492602311/12500000000000
 
-theorem frontend_margin : targetExponent-frontendExponent=(3/25000000000000 : ℝ) := by
+theorem frontend_margin : targetExponent-frontendExponent=(41/1000000000000000 : ℝ) := by
   norm_num [targetExponent,frontendExponent]
 
 theorem principal_exponent_lt {K m : ℕ} (hK : 100000000000000000000≤K) (c d : ℕ)

@@ -28,7 +28,7 @@ def partitionEntropy : ℝ := WeightedCacheParameters.Gn/Real.log 2
 def bankEntropy : ℝ := WeightedCacheParameters.Bn/Real.log 2
 def queryEntropy : ℝ := WeightedCacheParameters.Qn/Real.log 2
 def certificateExponent : ℝ := 2400349260231/1250000000000
-def targetExponent : ℝ := 384055881637/200000000000
+def targetExponent : ℝ := 1920279408184921/1000000000000000
 theorem log_two_pos : 0<Real.log 2 := Real.log_pos (by norm_num)
 
 theorem log_two_bounds :
@@ -249,7 +249,7 @@ theorem all_costs_lt_certificate : ∀ t ∈ costLedger, t < certificateExponent
   · exact h5
   · norm_num [certificateExponent]
 
-theorem certificate_margin : targetExponent - certificateExponent = (1/5000000000000 : ℝ) := by
+theorem certificate_margin : targetExponent - certificateExponent = (121/1000000000000000 : ℝ) := by
   norm_num [targetExponent, certificateExponent]
 theorem certificate_lt_target : certificateExponent < targetExponent := by
   norm_num [targetExponent, certificateExponent]

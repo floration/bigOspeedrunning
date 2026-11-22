@@ -6,7 +6,7 @@ optimization barrier for the explicitly defined weighted-cache model. -/
 namespace Race
 
 theorem bound :
-    EndStatement.ThreeSum.SolvedInTime (384055881637/200000000000 : Rat) :=
+    EndStatement.ThreeSum.SolvedInTime (1920279408184921/1000000000000000 : Rat) :=
   WeightedRace.bound
 
 theorem cache_optimum_interval :
@@ -20,8 +20,8 @@ theorem cache_optimization_limit (M : CacheOptimality.Model) {u v : ℝ}
   CacheOptimality.no_better_cache_parameters M hu hv hH
 
 theorem remaining_exponent_gain :
-    0 < (384055881637/200000000000 : ℝ) - CacheOptimality.optimum ∧
-    (384055881637/200000000000 : ℝ) - CacheOptimality.optimum ≤ 1/200000000000 :=
+    0 < (1920279408184921/1000000000000000 : ℝ) - CacheOptimality.optimum ∧
+    (1920279408184921/1000000000000000 : ℝ) - CacheOptimality.optimum ≤ 1/200000000000 :=
   CacheOptimality.remaining_exponent_gain
 
 end Race

@@ -184,7 +184,7 @@ theorem goodBlock_eventually {K : ℕ} (hK : 100000000000000000000 ≤ K) :
     (incidence_charge_tendsto hk).eventually (gt_mem_nhds hi)] with m hm hB hQ hA hP hI
   exact ⟨hm,hB,hQ,hA,hP,hI⟩
 
-theorem soft_certificate_margin : targetExponent-softCertificate=(1/6250000000000 : ℝ) := by
+theorem soft_certificate_margin : targetExponent-softCertificate=(81/1000000000000000 : ℝ) := by
   norm_num [targetExponent,softCertificate]
 
 end ThreeSum.WeightedGlobalOversizeRates

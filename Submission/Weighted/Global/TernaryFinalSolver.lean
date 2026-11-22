@@ -18,10 +18,10 @@ theorem weighted_ternary_hybrid_solves {κ : ℕ} (P : Profile κ) :
   TernarySolverEndBridge.hybrid_solves P.fastExecution
 
 /-- The original deterministic word-RAM benchmark, for every fixed
-polynomial magnitude exponent, at the exact rational exponent 384055881637/200000000000. -/
+polynomial magnitude exponent, at the exact rational exponent 1920279408184921/1000000000000000. -/
 theorem optimized_solvedInTime_384055881637_200000000000 :
-    EndStatement.ThreeSum.SolvedInTime (384055881637/200000000000 : Rat) := by
-  apply TernaryEndBridge.endStatement_of_solvers (by norm_num : (0:ℚ)≤384055881637/200000000000)
+    EndStatement.ThreeSum.SolvedInTime (1920279408184921/1000000000000000 : Rat) := by
+  apply TernaryEndBridge.endStatement_of_solvers (by norm_num : (0:ℚ)≤1920279408184921/1000000000000000)
   intro κ
   let P:=profile κ
   exact ⟨P.hybridProgram,P.hybridMain,P.hybridTime,P.hybridNeed,

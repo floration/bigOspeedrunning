@@ -1,7 +1,7 @@
 import Submission
 
 #check (Race.bound :
-  EndStatement.ThreeSum.SolvedInTime (384055881637/200000000000 : Rat))
+  EndStatement.ThreeSum.SolvedInTime (1920279408184921/1000000000000000 : Rat))
 #check Race.cache_optimum_interval
 #check Race.cache_optimization_limit
 #check Race.remaining_exponent_gain

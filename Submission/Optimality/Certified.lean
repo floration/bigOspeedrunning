@@ -48,13 +48,13 @@ theorem explicit_parameters_near_optimal :
 /-- Even perfect tuning of this model has at most this much exponent saving
 relative to the complete solver's certified exponent. -/
 theorem remaining_exponent_gain :
-    0 < (384055881637/200000000000 : ℝ) - optimum ∧
-    (384055881637/200000000000 : ℝ) - optimum ≤ 1/200000000000 := by
+    0 < (1920279408184921/1000000000000000 : ℝ) - optimum ∧
+    (1920279408184921/1000000000000000 : ℝ) - optimum ≤ 1/200000000000 := by
   obtain ⟨hl,hu⟩ := optimum_interval
   constructor <;> linarith
 
 theorem strict_improvement :
-    (384055881637/200000000000 : ℚ) < 96013971/50000000 := by decide +kernel
+    (1920279408184921/1000000000000000 : ℚ) < 96013971/50000000 := by decide +kernel
 
 #print axioms all_models_lower_bound
 #print axioms optimum_interval
