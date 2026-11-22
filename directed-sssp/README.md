@@ -15,4 +15,4 @@ Credit: the model, Dijkstra/Bellman-Ford programs and most of the proof are dark
 This extends C-HD past m ≤ n log^{3/4} n, giving T = O(n log^{b+1/6} n) at density n log^b n. It is a written argument, not built in Lean, and isn't part of any submission yet.
 
 ## Padding row (Family D): n·log^{7/6} n at m ≤ n log n
-`Race.bound = Bound 1 1 1 (7/6) 0`. This pads the C-HD algorithm (bigospeedrun/c-hd-proof) to density n log n. `Submission.PadCHD` and `Submission.SubmissionD` built on q's PC with only the standard axioms. The built `PadCHD.lean` has sha256 starting b01faa9a and ending e864. It will be added here once it's copied off the PC; the earlier draft isn't the built version.
+`Race.bound = Bound 1 1 1 (7/6) 0`. This pads the C-HD algorithm (bigospeedrun/c-hd-proof) to density n log n. `Submission.PadCHD` and `Submission.SubmissionD` built on q's PC with only the standard axioms. The built `PadCHD.lean` has sha256 starting b01faa9a and ending e864. The built files are in `pad_final/` (PadCHD.lean, SubmissionD.lean, plus PadCHD.fixes.diff). Branch `sssp-row-pad` has the verifier layout.

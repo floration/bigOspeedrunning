@@ -1,0 +1,336 @@
+diff --git a/orig/PadCHD.lean b/pad_final/PadCHD.lean
+index f6a7efc..3ea1c58 100644
+--- a/orig/PadCHD.lean
++++ b/pad_final/PadCHD.lean
+@@ -1,5 +1,6 @@
+ import Submission.DijkstraRowC
+ import Frontier.CHD.Final
++import Mathlib.Analysis.MeanInequalitiesPow
+
+ /-!
+ # Submission.PadCHD — C-HD above its density cap, by padding with isolated vertices
+@@ -210,7 +211,7 @@ theorem evalW_tw {t : State V} {x : String} {a c k : ℕ} (hc : t.cap ≤ c) :
+     simp only [wv] at hx
+     simp only [evalW, Option.bind_eq_bind, Option.bind_eq_some_iff] at h ⊢
+     obtain <j, h1, h2> := h
+-    exact <j, ih hx h1, by simpa only [tw_wlen, tw_wa] using h2>
++    exact <j, ih hx h1, h2>
+
+ theorem evalV_tw {t : State V} {x : String} {a c k : ℕ} (hc : t.cap ≤ c) :
+     ∀ {e : VExpr} {v : V}, x ∉ vv e → evalV ops t e = some v →
+@@ -230,7 +231,7 @@ theorem evalV_tw {t : State V} {x : String} {a c k : ℕ} (hc : t.cap ≤ c) :
+     simp only [vv] at hx
+     simp only [evalV, Option.bind_eq_bind, Option.bind_eq_some_iff] at h ⊢
+     obtain <j, h1, h2> := h
+-    exact <j, evalW_tw hc hx h1, by simpa only [tw_vlen, tw_va] using h2>
++    exact <j, evalW_tw hc hx h1, h2>
+
+ /-- **The frame lemma.** -/
+ theorem exec_tw {x : String} {a c k : ℕ} :
+@@ -319,9 +320,9 @@ theorem exec_tw {x : String} {a c k : ℕ} :
+       rw [exec_seq, Option.bind_eq_some_iff] at h
+       obtain <s', h1, h2> := h
+       simp only [names, List.mem_append, not_or] at hx
+-      obtain <e1, c1, p1> := exec_tw f p t s' h1 hc hx.1 hp
+-      obtain <e2, c2, p2> := exec_tw f q s' r h2 (by rw [c1]; exact hc) hx.2
+-        (by rw [p1]; exact hp)
++      obtain <e1, c1, p1> := exec_tw (x := x) (a := a) (c := c) (k := k) f p t s' h1 hc hx.1 hp
++      obtain <e2, c2, p2> := exec_tw (x := x) (a := a) (c := c) (k := k) f q s' r h2
++        (c1.trans_le hc) hx.2 (by rw [p1]; exact hp)
+       refine <?_, c2.trans c1, p2.trans p1>
+       rw [exec_seq, e1]
+       exact e2
+@@ -331,13 +332,15 @@ theorem exec_tw {x : String} {a c k : ℕ} :
+       simp only [names, List.mem_append, not_or] at hx
+       have hxv' := evalW_tw (a := a) (k := k) hc hx.1 hxv
+       split_ifs at h2 with hz
+-      · obtain <e1, c1, p1> := exec_tw f p (t.charge 1) r h2 hc hx.2.1 hp
++      · obtain <e1, c1, p1> := exec_tw (x := x) (a := a) (c := c) (k := k) f p (t.charge 1) r h2
++          hc hx.2.1 hp
+         refine <?_, c1, p1>
+         rw [exec_ite, hxv']
+         simp only [Option.bind_some, ne_eq, hz, not_false_eq_true, ite_true]
+         rw [tw_charge]
+         exact e1
+-      · obtain <e1, c1, p1> := exec_tw f q (t.charge 1) r h2 hc hx.2.2 hp
++      · obtain <e1, c1, p1> := exec_tw (x := x) (a := a) (c := c) (k := k) f q (t.charge 1) r h2
++          hc hx.2.2 hp
+         refine <?_, c1, p1>
+         rw [exec_ite, hxv']
+         simp only [Option.bind_some]
+@@ -352,9 +355,10 @@ theorem exec_tw {x : String} {a c k : ℕ} :
+       split_ifs at h2 with hz
+       · rw [Option.bind_eq_some_iff] at h2
+         obtain <s', h3, h4> := h2
+-        obtain <e1, c1, p1> := exec_tw f b (t.charge 1) s' h3 hc hx'.2 hp
+-        obtain <e2, c2, p2> := exec_tw f (.while cnd b) s' r h4 (by rw [c1]; exact hc) hx
+-          (by rw [p1]; exact hp)
++        obtain <e1, c1, p1> := exec_tw (x := x) (a := a) (c := c) (k := k) f b (t.charge 1) s' h3
++          hc hx'.2 hp
++        obtain <e2, c2, p2> := exec_tw (x := x) (a := a) (c := c) (k := k) f (.while cnd b) s' r h4
++          (c1.trans_le hc) hx (by rw [p1]; exact hp)
+         refine <?_, c2.trans c1, p2.trans p1>
+         rw [exec_while, hxv']
+         simp only [Option.bind_some, ne_eq, hz, not_false_eq_true, ite_true]
+@@ -373,7 +377,8 @@ theorem exec_tw {x : String} {a c k : ℕ} :
+       | some body =>
+         rw [hb] at h
+         have hbody : x ∉ names body := hp body (List.mem_of_getElem? hb)
+-        obtain <e1, c1, p1> := exec_tw f body t.enter r h hc hbody hp
++        obtain <e1, c1, p1> := exec_tw (x := x) (a := a) (c := c) (k := k) f body t.enter r h hc
++          hbody hp
+         refine <?_, c1, p1>
+         rw [exec_call, show (tw t x a c k).procs = t.procs from rfl, hb]
+         rw [tw_enter]
+@@ -402,25 +407,28 @@ theorem walk_pad_of {G : Graph} {n' : ℕ} {h : G.n ≤ n'} {u v : Fin G.n} {p :
+   | nil u => exact Graph.IsWalk.nil _
+   | cons _ ih => exact Graph.IsWalk.cons ih
+
+-theorem walk_of_pad {G : Graph} {n' : ℕ} {h : G.n ≤ n'} {u' v' : Fin n'} {p : List (Fin G.m)}
+-    (hw : (pad G n' h).IsWalk u' v' p) :
+-    ∀ v : Fin G.n, (v' : ℕ) = v → ∃ u : Fin G.n, (u : ℕ) = u' ∧ G.IsWalk u v p := by
+-  induction hw with
+-  | nil u =>
+-    intro v hv
++theorem walk_of_pad {G : Graph} {n' : ℕ} {h : G.n ≤ n'} {v' : Fin n'} (v : Fin G.n)
++    (hv : (v' : ℕ) = v) :
++    ∀ (p : List (Fin G.m)) (u' : Fin n'), (pad G n' h).IsWalk u' v' p →
++      ∃ u : Fin G.n, (u : ℕ) = u' ∧ G.IsWalk u v p
++  | [], u', hw => by
++    have huv : u' = v' := (Graph.isWalk_nil_iff (G := pad G n' h)).mp hw
++    subst huv
+     exact <v, hv.symm, Graph.IsWalk.nil v>
+-  | @cons e w q _ ih =>
+-    intro v hv
+-    obtain <u0, hu0, hw0> := ih v hv
+-    have hu : u0 = G.dst e := Fin.ext hu0
++  | e :: q, u', hw => by
++    obtain <hsrc, hw'> := (Graph.isWalk_cons_iff (G := pad G n' h)).mp hw
++    obtain <u0, hu0, hw0> := walk_of_pad v hv q _ hw'
++    have hu : u0 = G.dst e := Fin.ext (by simpa [pad] using hu0)
+     subst hu
+-    exact <G.src e, rfl, Graph.IsWalk.cons hw0>
++    refine <G.src e, ?_, Graph.IsWalk.cons hw0>
++    rw [← hsrc]
++    rfl
+
+ theorem walk_pad_iff {G : Graph} {n' : ℕ} {h : G.n ≤ n'} {u v : Fin G.n} {p : List (Fin G.m)} :
+     (pad G n' h).IsWalk (Fin.castLE h u) (Fin.castLE h v) p ↔ G.IsWalk u v p := by
+   constructor
+   · intro hw
+-    obtain <u0, hu0, hw0> := walk_of_pad hw v rfl
++    obtain <u0, hu0, hw0> := walk_of_pad (n' := n') (h := h) (v' := Fin.castLE h v) v rfl p _ hw
+     have : u0 = u := Fin.ext hu0
+     subst this
+     exact hw0
+@@ -477,7 +485,10 @@ def p3 : Program :=
+
+ /-! ## 4. The padded instance -/
+
+-theorem npad_ge (n m : ℕ) : n ≤ npad n m := by unfold npad; omega
++theorem npad_ge (n m : ℕ) : n ≤ npad n m := by
++  unfold npad
++  rw [Nat.add_assoc]
++  exact Nat.le_add_right _ _
+
+ /-- The padded graph `G'` (vertex count `npad n m`, same edges). -/
+ def padG (G : Graph) : Graph := pad G (npad G.n G.m) (npad_ge G.n G.m)
+@@ -595,7 +606,9 @@ theorem test1_eval : evalW (initState p3 G s) (lt (var "n") (lit 65536))
+     = some (if G.n < 65536 then 1 else 0) := by
+   have hc : 65536 < (initState p3 G s).cap := by
+     rw [p3_cap]
+-    exact lt_of_lt_of_le (by norm_num) (Nat.pow_le_pow_left (by omega : 2 ≤ G.n + G.m + 2) 322)
++    exact lt_of_lt_of_le
++      (lt_of_lt_of_le (by norm_num : 65536 < 2 ^ 17) (Nat.pow_le_pow_right (by norm_num) (by norm_num)))
++      (Nat.pow_le_pow_left (by omega : 2 ≤ G.n + G.m + 2) 322)
+   exact evalW_lt_of (by rw [evalW_var, (F0.init_state (G := G) p3 s).hn]) (evalW_lit_of hc)
+     (by omega)
+
+@@ -640,7 +653,7 @@ def kSetup (n : ℕ) : ℕ := 14 + 3 * Nat.log 2 n + 2 * GateCCalc.F n
+
+ theorem padSetup_runs (hn : 65536 ≤ G.n) :
+     Runs realOps padSetup (((initState p3 G s).charge 1).charge 1) (fun X =>
+-      X = tw (initState Final.chdProgram (padG G) (padS G s)) ZN G.n ((G.n + G.m + 2) ^ 322)
++      X = tw (initState Frontier.CHD.Final.chdProgram (padG G) (padS G s)) ZN G.n ((G.n + G.m + 2) ^ 322)
+         (kSetup G.n)) := by
+   unfold padSetup
+   set st2 := ((initState p3 G s).charge 1).charge 1 with hst2
+@@ -657,6 +670,10 @@ theorem padSetup_runs (hn : 65536 ≤ G.n) :
+   set B := G.n + G.m + 2 with hB
+   have hB4 : B ^ 4 ≤ c := Nat.pow_le_pow_right (by omega) (by norm_num)
+   have hB1 : B ≤ B ^ 4 := Nat.le_self_pow (by norm_num) B
++  have hB2 : 2 * B ≤ B ^ 4 := by
++    have e : B ^ 4 = B ^ 3 * B := by ring
++    rw [e]
++    exact Nat.mul_le_mul_right B (le_trans (by omega : 2 ≤ B) (Nat.le_self_pow (by norm_num) B))
+   have hcube : 16 * (L * L * L) + 16 < B ^ 4 := by
+     have hLB : L ≤ B := by omega
+     have h1 : L * L * L ≤ B * B * B := Nat.mul_le_mul (Nat.mul_le_mul hLB hLB) hLB
+@@ -674,7 +691,7 @@ theorem padSetup_runs (hn : 65536 ≤ G.n) :
+   refine runs_seq ((thrProg_runs (ops := realOps) r1 L hpa1 (by rw [a1c, hcap2]; omega)).mono ?_)
+   rintro r2 <hpr2, hA2, hc2>
+   obtain <a2w, a2v, a2wa, a2va, a2wl, a2vl, a2c, a2s, a2p> := hA2
+-  have hr2cap : r2.cap = c := by rw [a2c, a1c]
++  have hr2cap : r2.cap = c := by rw [a2c, a1c, hcap2]
+   have hr2n : r2.w "n" = G.n := by
+     rw [a2w "n" (by simp), a1w "n" (by simp), hst2n]
+   have hr2m : r2.w "m" = G.m := by
+@@ -725,29 +742,29 @@ theorem padSetup_runs (hn : 65536 ≤ G.n) :
+     by_cases h5 : y = "n"
+     · subst h5; simp [ZN, initState, padG, pad]
+     by_cases h6 : y = ZN
+-    · subst h6; simp [ZN]
+-    simp only [h1, h2, h3, h4, h5, h6, if_false]
++    · subst h6; simp [hr3, State.setW, State.charge, ZN]
++    simp only [h1, h2, h3, h4, h5, h6, if_false, hr3, State.setW, State.charge]
+     rw [a2w y (by simp [h1, h2]), a1w y (by simp [h3, h4])]
+     simp [hst2, State.charge, initState, h5, padG, pad, padS]
+-  · show r2.v = (initState Final.chdProgram (padG G) (padS G s)).v
++  · show r2.v = (initState Frontier.CHD.Final.chdProgram (padG G) (padS G s)).v
+     rw [a2v, a1v]
+     rfl
+-  · show r2.wa = (initState Final.chdProgram (padG G) (padS G s)).wa
++  · show r2.wa = (initState Frontier.CHD.Final.chdProgram (padG G) (padS G s)).wa
+     rw [a2wa, a1wa]
+-    funext a j
+-    simp [hst2, State.charge, initState, padG, pad]
+-  · show r2.va = (initState Final.chdProgram (padG G) (padS G s)).va
++    rfl
++  · show r2.va = (initState Frontier.CHD.Final.chdProgram (padG G) (padS G s)).va
+     rw [a2va, a1va]
+-    funext a j
+-    simp [hst2, State.charge, initState, padG, pad]
+-  · show r2.wlen = (initState Final.chdProgram (padG G) (padS G s)).wlen
++    rfl
++  · show r2.wlen = (initState Frontier.CHD.Final.chdProgram (padG G) (padS G s)).wlen
+     rw [a2wl, a1wl]
+     funext a
+     simp [hst2, State.charge, initState, padG, pad]
+-  · show r2.vlen = (initState Final.chdProgram (padG G) (padS G s)).vlen
++    try (split_ifs <;> rfl)
++  · show r2.vlen = (initState Frontier.CHD.Final.chdProgram (padG G) (padS G s)).vlen
+     rw [a2vl, a1vl]
+     funext a
+     simp [hst2, State.charge, initState, padG, pad]
++    try (split_ifs <;> rfl)
+   · show r2.cap = c
+     exact hr2cap
+   · show r2.cost + 1 + 1 + 1 + 1 + 1 + 1 = 0 + kSetup G.n
+@@ -758,13 +775,13 @@ theorem padSetup_runs (hn : 65536 ≤ G.n) :
+   · show r2.space = 0
+     rw [a2s, a1s]
+     rfl
+-  · show r2.procs = Final.chdProgram.procs
++  · show r2.procs = Frontier.CHD.Final.chdProgram.procs
+     rw [a2p, a1p]
+     rfl
+
+ /-! ## 8. The C-HD run on `G'`, spliced -/
+
+-theorem chd_cap_le : (initState Final.chdProgram (padG G) (padS G s)).cap ≤ (G.n + G.m + 2) ^ 322 := by
++theorem chd_cap_le : (initState Frontier.CHD.Final.chdProgram (padG G) (padS G s)).cap ≤ (G.n + G.m + 2) ^ 322 := by
+   show (npad G.n G.m + G.m + 2) ^ (160 + 1) ≤ (G.n + G.m + 2) ^ 322
+   have hq : G.m / GateCCalc.F G.n ≤ G.m := Nat.div_le_self _ _
+   have h1 : npad G.n G.m + G.m + 2 ≤ (G.n + G.m + 2) ^ 2 := by
+@@ -921,9 +938,9 @@ theorem post_runs (Y : State ℝ≥0) (n : ℕ) (hZ : Y.w ZN = n) (hR : n ≤ Y.
+
+ /-! ## 10. The padding branch, end to end -/
+
+-theorem body3_pad (K : ℝ) (hE : Final.chdProgram.Exact)
++theorem body3_pad (K : ℝ) (hE : Frontier.CHD.Final.chdProgram.Exact)
+     (hW : ∀ (H : Graph) (z : Fin H.n),
+-      Final.chdProgram.RunsWithin H z (K * GateCTarget.Tdisp GateCCalc.F H.n H.m))
++      Frontier.CHD.Final.chdProgram.RunsWithin H z (K * GateCTarget.Tdisp GateCCalc.F H.n H.m))
+     (hn : 65536 ≤ G.n) (hmn : G.m / G.n ≤ G.n) :
+     ∃ fuel r, p3.run fuel G s = some r ∧ r.Solves G s ∧
+       (r.cost : ℝ) ≤ ((kSetup G.n + 12 * G.n + 8 : ℕ) : ℝ)
+@@ -933,8 +950,8 @@ theorem body3_pad (K : ℝ) (hE : Final.chdProgram.Exact)
+   obtain <f, R, hR, hS> := hE (padG G) (padS G s)
+   have hRc : (R.cost : ℝ) ≤ K * GateCTarget.Tdisp GateCCalc.F (npad G.n G.m) G.m :=
+     Program.runsWithin_unique (hW (padG G) (padS G s)) hR
+-  have hR' : exec realOps f Final.chdProgram.body
+-      (initState Final.chdProgram (padG G) (padS G s)) = some R := hR
++  have hR' : exec realOps f Frontier.CHD.Final.chdProgram.body
++      (initState Frontier.CHD.Final.chdProgram (padG G) (padS G s)) = some R := hR
+   obtain <e1, -, -> := exec_tw (ops := realOps) (x := ZN) (a := G.n) (c := c) (k := k) f _ _ R hR'
+     (chd_cap_le (G := G) (s := s)) names_body (fun q hq => names_procs q hq)
+   have hRn : R.wlen "reach" = npad G.n G.m := hS.1
+@@ -1018,13 +1035,13 @@ theorem Tdisp_nonneg (n m : ℕ) : 0 ≤ GateCTarget.Tdisp GateCCalc.F n m := by
+     positivity
+
+ /-- C-HD's theorem with a nonnegative constant. -/
+-theorem chd_K : ∃ K : ℝ, 0 ≤ K ∧ Final.chdProgram.Exact ∧ ∀ (H : Graph) (z : Fin H.n),
+-    Final.chdProgram.RunsWithin H z (K * GateCTarget.Tdisp GateCCalc.F H.n H.m) := by
+-  obtain <hE, hW> := Final.chd_exact_within
++theorem chd_K : ∃ K : ℝ, 0 ≤ K ∧ Frontier.CHD.Final.chdProgram.Exact ∧ ∀ (H : Graph) (z : Fin H.n),
++    Frontier.CHD.Final.chdProgram.RunsWithin H z (K * GateCTarget.Tdisp GateCCalc.F H.n H.m) := by
++  obtain <hE, hW> := Frontier.CHD.Final.chd_exact_within
+   have key : ∀ K : ℝ, (∀ (H : Graph) (z : Fin H.n),
+-      Final.chdProgram.RunsWithin H z (K * GateCTarget.Tdisp GateCCalc.F H.n H.m)) →
++      Frontier.CHD.Final.chdProgram.RunsWithin H z (K * GateCTarget.Tdisp GateCCalc.F H.n H.m)) →
+       ∃ K' : ℝ, 0 ≤ K' ∧ ∀ (H : Graph) (z : Fin H.n),
+-        Final.chdProgram.RunsWithin H z (K' * GateCTarget.Tdisp GateCCalc.F H.n H.m) := by
++        Frontier.CHD.Final.chdProgram.RunsWithin H z (K' * GateCTarget.Tdisp GateCCalc.F H.n H.m) := by
+     intro K hK
+     refine <max K 0, le_max_right _ _, fun H z => ?_>
+     obtain <f, r, h, hc> := hK H z
+@@ -1078,7 +1095,7 @@ theorem master {n m ℓ pr np : ℝ} (hn : 1 ≤ n) (hl : 2 ≤ ℓ) (hm : 0 ≤
+       mul_le_mul_of_nonneg_right hnp (by linarith)
+     have h3 : (2 * n + m / pr) * (3 * ℓ) = 3 * (2 * (n * ℓ) + m * (ℓ / pr)) := by
+       field_simp
+-      ring
++      try ring
+     linarith
+   have hA0 : 0 ≤ 2 * (n * ℓ) := by positivity
+   have hB0 : 0 ≤ m * (ℓ / pr) := by positivity
+@@ -1212,6 +1229,7 @@ theorem pad_tchd (hn : 65536 ≤ G.n) (hmn : G.m / G.n ≤ G.n) :
+     have h1 := Nat.div_add_mod G.m Fn
+     have h2 := Nat.mod_lt G.m (by omega : Fn > 0)
+     have h3 : Fn * (q + 1) = Fn * q + Fn := by ring
++    rw [← hqdef] at h1
+     rw [h3]
+     linarith
+   have hcond : G.m ≤ npad G.n G.m * GateCCalc.F (npad G.n G.m) := by
+@@ -1331,9 +1349,9 @@ theorem final_C2 {n m ℓ L pr K e W T c : ℝ} (hn : 1 ≤ n) (hl1 : 1 ≤ ℓ)
+ /-! ## 12. The clauses -/
+
+ /-- Polynomial fallback, every graph. -/
+-theorem clause2_p3 (K : ℝ) (hK0 : 0 ≤ K) (hE : Final.chdProgram.Exact)
++theorem clause2_p3 (K : ℝ) (hK0 : 0 ≤ K) (hE : Frontier.CHD.Final.chdProgram.Exact)
+     (hW : ∀ (H : Graph) (z : Fin H.n),
+-      Final.chdProgram.RunsWithin H z (K * GateCTarget.Tdisp GateCCalc.F H.n H.m)) :
++      Frontier.CHD.Final.chdProgram.RunsWithin H z (K * GateCTarget.Tdisp GateCCalc.F H.n H.m)) :
+     ∀ (G : Graph) (s : Fin G.n),
+       CorrectWithin p3 G s ((2100 + 100 * K) * ((G.n : ℝ) + 1) * ((G.m : ℝ) + 1)) := by
+   intro G s
+@@ -1386,19 +1404,25 @@ theorem clause2_p3 (K : ℝ) (hK0 : 0 ≤ K) (hE : Final.chdProgram.Exact)
+   exact final_C2 hn1 (by linarith) hℓn hll hLn hFL hK0 hmR he hW hT hc'
+
+ /-- Clause 1 for the rows `D = n·⌊⌊log₂ n⌋^b⌋`, `T = n·(log n)^(b + 1/6)`, `3/4 ≤ b ≤ 2`. -/
+-theorem clause1_P (K : ℝ) (hK0 : 0 ≤ K) (hE : Final.chdProgram.Exact)
++theorem clause1_P (K : ℝ) (hK0 : 0 ≤ K) (hE : Frontier.CHD.Final.chdProgram.Exact)
+     (hW : ∀ (H : Graph) (z : Fin H.n),
+-      Final.chdProgram.RunsWithin H z (K * GateCTarget.Tdisp GateCCalc.F H.n H.m))
++      Frontier.CHD.Final.chdProgram.RunsWithin H z (K * GateCTarget.Tdisp GateCCalc.F H.n H.m))
+     (b b' : ℚ) (hb0 : 3 / 4 ≤ b) (hb2 : b ≤ 2) (hb' : b' = b + 1 / 6) :
+     ∀ (G : Graph) (s : Fin G.n), 65536 ≤ G.n → Sparse ((1 : ℚ) / 1) b G.n G.m →
+       CorrectWithin p3 G s ((2100 + 100 * K) * Time ((1 : ℚ) / 1) b' ((0 : ℚ) / 1) G.n) := by
+   intro G s hn hsp
+   have hn16 : 16 ≤ G.n := by omega
+-  have hbR0 : (3 / 4 : ℝ) ≤ (b : ℝ) := by exact_mod_cast hb0
+-  have hbR2 : (b : ℝ) ≤ 2 := by exact_mod_cast hb2
++  have hbR0 : (3 / 4 : ℝ) ≤ (b : ℝ) := by
++    have h := (Rat.cast_le (K := ℝ)).mpr hb0
++    push_cast at h
++    linarith
++  have hbR2 : (b : ℝ) ≤ 2 := by
++    have h := (Rat.cast_le (K := ℝ)).mpr hb2
++    push_cast at h
++    linarith
+   set L : ℝ := ((Nat.log 2 G.n : ℕ) : ℝ) with hLdef
+   set ℓ : ℝ := Real.log (G.n : ℝ) with hℓdef
+-  have hnR : (16 : ℝ) ≤ (G.n : ℝ) := by exact_mod_cast hn
++  have hnR : (16 : ℝ) ≤ (G.n : ℝ) := by exact_mod_cast hn16
+   have hℓ : (2.7 : ℝ) ≤ ℓ := log_ge (G := G) hn16
+   have hℓ0 : 0 < ℓ := by linarith
+   have hLb : L ≤ 1.5 * ℓ := L_le_one_five (G := G) hn16
