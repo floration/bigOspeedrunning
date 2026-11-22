@@ -1,0 +1,150 @@
+diff --git a/Audit.lean b/Audit.lean
+index c16504a..b7523c4 100644
+--- a/Audit.lean
++++ b/Audit.lean
+@@ -1,7 +1,7 @@
+ import Submission
+ 
+ #check (Race.bound :
+-  EndStatement.ThreeSum.SolvedInTime (384055881637/200000000000 : Rat))
++  EndStatement.ThreeSum.SolvedInTime (1920279408184921/1000000000000000 : Rat))
+ #check Race.cache_optimum_interval
+ #check Race.cache_optimization_limit
+ #check Race.remaining_exponent_gain
+diff --git a/Submission.lean b/Submission.lean
+index b94642f..4cbad73 100644
+--- a/Submission.lean
++++ b/Submission.lean
+@@ -6,7 +6,7 @@ optimization barrier for the explicitly defined weighted-cache model. -/
+ namespace Race
+ 
+ theorem bound :
+-    EndStatement.ThreeSum.SolvedInTime (384055881637/200000000000 : Rat) :=
++    EndStatement.ThreeSum.SolvedInTime (1920279408184921/1000000000000000 : Rat) :=
+   WeightedRace.bound
+ 
+ theorem cache_optimum_interval :
+@@ -20,8 +20,8 @@ theorem cache_optimization_limit (M : CacheOptimality.Model) {u v : ℝ}
+   CacheOptimality.no_better_cache_parameters M hu hv hH
+ 
+ theorem remaining_exponent_gain :
+-    0 < (384055881637/200000000000 : ℝ) - CacheOptimality.optimum ∧
+-    (384055881637/200000000000 : ℝ) - CacheOptimality.optimum ≤ 1/200000000000 :=
++    0 < (1920279408184921/1000000000000000 : ℝ) - CacheOptimality.optimum ∧
++    (1920279408184921/1000000000000000 : ℝ) - CacheOptimality.optimum ≤ 1/200000000000 :=
+   CacheOptimality.remaining_exponent_gain
+ 
+ end Race
+diff --git a/Submission/Optimality/Certified.lean b/Submission/Optimality/Certified.lean
+index 000beb4..261d63f 100644
+--- a/Submission/Optimality/Certified.lean
++++ b/Submission/Optimality/Certified.lean
+@@ -48,13 +48,13 @@ theorem explicit_parameters_near_optimal :
+ /-- Even perfect tuning of this model has at most this much exponent saving
+ relative to the complete solver's certified exponent. -/
+ theorem remaining_exponent_gain :
+-    0 < (384055881637/200000000000 : ℝ) - optimum ∧
+-    (384055881637/200000000000 : ℝ) - optimum ≤ 1/200000000000 := by
++    0 < (1920279408184921/1000000000000000 : ℝ) - optimum ∧
++    (1920279408184921/1000000000000000 : ℝ) - optimum ≤ 1/200000000000 := by
+   obtain ⟨hl,hu⟩ := optimum_interval
+   constructor <;> linarith
+ 
+ theorem strict_improvement :
+-    (384055881637/200000000000 : ℚ) < 96013971/50000000 := by decide +kernel
++    (1920279408184921/1000000000000000 : ℚ) < 96013971/50000000 := by decide +kernel
+ 
+ #print axioms all_models_lower_bound
+ #print axioms optimum_interval
+diff --git a/Submission/Weighted.lean b/Submission/Weighted.lean
+index 2c90a3c..705c9f4 100644
+--- a/Submission/Weighted.lean
++++ b/Submission/Weighted.lean
+@@ -4,7 +4,7 @@ import Submission.Weighted.Global.TernaryFinalSolver
+ `Submission.lean` and its baseline theorem are preserved byte for byte. -/
+ namespace WeightedRace
+ 
+-theorem bound : EndStatement.ThreeSum.SolvedInTime (384055881637/200000000000 : Rat) :=
++theorem bound : EndStatement.ThreeSum.SolvedInTime (1920279408184921/1000000000000000 : Rat) :=
+   ThreeSum.optimized_solvedInTime_384055881637_200000000000
+ 
+ end WeightedRace
+diff --git a/Submission/Weighted/Global/CountFrontendBudget.lean b/Submission/Weighted/Global/CountFrontendBudget.lean
+index d827a0f..025bf34 100644
+--- a/Submission/Weighted/Global/CountFrontendBudget.lean
++++ b/Submission/Weighted/Global/CountFrontendBudget.lean
+@@ -381,7 +381,7 @@ theorem all_prefix_time_bound {K k m b C A degree : ℕ}
+ 
+ def frontendExponent : ℝ :=24003492602311/12500000000000
+ 
+-theorem frontend_margin : targetExponent-frontendExponent=(3/25000000000000 : ℝ) := by
++theorem frontend_margin : targetExponent-frontendExponent=(41/1000000000000000 : ℝ) := by
+   norm_num [targetExponent,frontendExponent]
+ 
+ theorem principal_exponent_lt {K m : ℕ} (hK : 100000000000000000000≤K) (c d : ℕ)
+diff --git a/Submission/Weighted/Global/TernaryFinalSolver.lean b/Submission/Weighted/Global/TernaryFinalSolver.lean
+index aec6d46..c8410c2 100644
+--- a/Submission/Weighted/Global/TernaryFinalSolver.lean
++++ b/Submission/Weighted/Global/TernaryFinalSolver.lean
+@@ -18,10 +18,10 @@ theorem weighted_ternary_hybrid_solves {κ : ℕ} (P : Profile κ) :
+   TernarySolverEndBridge.hybrid_solves P.fastExecution
+ 
+ /-- The original deterministic word-RAM benchmark, for every fixed
+-polynomial magnitude exponent, at the exact rational exponent 384055881637/200000000000. -/
++polynomial magnitude exponent, at the exact rational exponent 1920279408184921/1000000000000000. -/
+ theorem optimized_solvedInTime_384055881637_200000000000 :
+-    EndStatement.ThreeSum.SolvedInTime (384055881637/200000000000 : Rat) := by
+-  apply TernaryEndBridge.endStatement_of_solvers (by norm_num : (0:ℚ)≤384055881637/200000000000)
++    EndStatement.ThreeSum.SolvedInTime (1920279408184921/1000000000000000 : Rat) := by
++  apply TernaryEndBridge.endStatement_of_solvers (by norm_num : (0:ℚ)≤1920279408184921/1000000000000000)
+   intro κ
+   let P:=profile κ
+   exact ⟨P.hybridProgram,P.hybridMain,P.hybridTime,P.hybridNeed,
+diff --git a/Submission/Weighted/Global/TernaryOversizeRates.lean b/Submission/Weighted/Global/TernaryOversizeRates.lean
+index 23e26be..25c8317 100644
+--- a/Submission/Weighted/Global/TernaryOversizeRates.lean
++++ b/Submission/Weighted/Global/TernaryOversizeRates.lean
+@@ -184,7 +184,7 @@ theorem goodBlock_eventually {K : ℕ} (hK : 100000000000000000000 ≤ K) :
+     (incidence_charge_tendsto hk).eventually (gt_mem_nhds hi)] with m hm hB hQ hA hP hI
+   exact ⟨hm,hB,hQ,hA,hP,hI⟩
+ 
+-theorem soft_certificate_margin : targetExponent-softCertificate=(1/6250000000000 : ℝ) := by
++theorem soft_certificate_margin : targetExponent-softCertificate=(81/1000000000000000 : ℝ) := by
+   norm_num [targetExponent,softCertificate]
+ 
+ end ThreeSum.WeightedGlobalOversizeRates
+diff --git a/Submission/Weighted/Global/TernaryProfileRuntime.lean b/Submission/Weighted/Global/TernaryProfileRuntime.lean
+index 00efac2..11caa72 100644
+--- a/Submission/Weighted/Global/TernaryProfileRuntime.lean
++++ b/Submission/Weighted/Global/TernaryProfileRuntime.lean
+@@ -70,7 +70,7 @@ theorem hybrid_polyNeed (P : Profile κ) : PolyNeed P.hybridNeed :=
+ 
+ theorem hybrid_time_target (P : Profile κ) :
+     ∀ᶠ n : ℕ in atTop,
+-      timeUpTo P.hybridTime n ((n:ℝ)^(κ:ℝ))≤(n:ℝ)^(384055881637/200000000000:ℝ) :=
++      timeUpTo P.hybridTime n ((n:ℝ)^(κ:ℝ))≤(n:ℝ)^(1920279408184921/1000000000000000:ℝ) :=
+   TernaryHybridCosts.timeUpTo_eventually P.fast_powerBound
+     (by norm_num [exponent]) (by norm_num [exponent]) κ P.cutoff
+ 
+diff --git a/Submission/Weighted/GlobalParameters.lean b/Submission/Weighted/GlobalParameters.lean
+index f557773..bfe8a6b 100644
+--- a/Submission/Weighted/GlobalParameters.lean
++++ b/Submission/Weighted/GlobalParameters.lean
+@@ -28,7 +28,7 @@ def partitionEntropy : ℝ := WeightedCacheParameters.Gn/Real.log 2
+ def bankEntropy : ℝ := WeightedCacheParameters.Bn/Real.log 2
+ def queryEntropy : ℝ := WeightedCacheParameters.Qn/Real.log 2
+ def certificateExponent : ℝ := 2400349260231/1250000000000
+-def targetExponent : ℝ := 384055881637/200000000000
++def targetExponent : ℝ := 1920279408184921/1000000000000000
+ theorem log_two_pos : 0<Real.log 2 := Real.log_pos (by norm_num)
+ 
+ theorem log_two_bounds :
+@@ -249,7 +249,7 @@ theorem all_costs_lt_certificate : ∀ t ∈ costLedger, t < certificateExponent
+   · exact h5
+   · norm_num [certificateExponent]
+ 
+-theorem certificate_margin : targetExponent - certificateExponent = (1/5000000000000 : ℝ) := by
++theorem certificate_margin : targetExponent - certificateExponent = (121/1000000000000000 : ℝ) := by
+   norm_num [targetExponent, certificateExponent]
+ theorem certificate_lt_target : certificateExponent < targetExponent := by
+   norm_num [targetExponent, certificateExponent]
