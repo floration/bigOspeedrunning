@@ -105,3 +105,26 @@ It assumes the plain-simplex gain from degree-8 signatures carries over unchange
 Harman minorant prices and the Type III ranges all depend on the weight's shape, and they are the likeliest reason the 182 and 180 authors
 stopped at degree 6. This is evidence that degree-8 signatures are worth testing in the real criterion, not a bound. Nothing here should be
 posted as a Claimed 176.
+
+## Real test in the authors' own optimizer (2026-11-23): degree-8 weights FAIL
+
+The 180 release's missing optimizer modules ship in the 182 authors' public package
+(`romyar1/prime-gaps-lean` release `external-numerics-20260909`, SHA-256 2960729e…f3b,
+`snapshot/prime_gaps_20260903/experiments/fragment_ritz/`). Its `incidence_multicap_spline_ritz.py` takes `--angular`.
+Run with the 182 trial's own input and domains (`results/incidence_multicap_spline_a6_n32768.json`), 32,768 intervals:
+
+| angular degree | basis | cap quotient (cutoff 1e-12) |
+|---|---|---|
+| 6 (reproduces the saved 0.9997127961393) | 726 | 0.9997127961 |
+| 8 | 1452 | 0.9997565513 |
+| **gain** | | **+4.4 × 10⁻⁵** |
+
+(The 1e-14 cutoff rows in the logs are ill-conditioned and should be ignored.) Logs are in `runs/`.
+
+In the real criterion, which includes the enlarged support and fragment caps, degree 8 gains only 4.4 × 10⁻⁵. The plain-simplex
+surrogate predicted ~1.4 × 10⁻², so it was about 300× too optimistic. The two-pair 176 route needs about 1.5 × 10⁻³ extra,
+so **it fails by about 35×**. The direct 38-shift route needs ~4.5 × 10⁻³ and fails too. The only effect is that the 180 margin could grow from
+~1 × 10⁻⁶ to ~4.5 × 10⁻⁵, which doesn't change the integer.
+
+Reproduction of the 180 margin: `check_slack_uncut.py` from the 180 release replays the archived certificates to
+excess 1.027153 × 10⁻⁶. A from-scratch recertification needs the authors' 3.1 GB payload, which they share only on request.

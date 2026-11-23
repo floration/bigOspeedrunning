@@ -1,0 +1,29 @@
+{"event": "INIT", "k": 39, "N": 32768, "basis": 11, "tilted_total_mean": 0.5109304404575156, "tilt": 25.0}
+{"event": "FFT_DAMPING", "moment_tilt": 35.0, "fiber_tilt": 20.0}
+{"event": "SPLINE_BASIS", "basis": 242, "radial": 22, "angular_statistics": 11, "degree": 3, "nonzero_radial_pairs": 70}
+{"event": "SPLINE_I_SHELL", "cap": 11810}
+{"event": "SPARSE_SPLINE_AFFINE", "cap": 11810, "active_rows": 638}
+{"event": "MULTICAP_BASIS_COMPONENT", "cap": 11810, "basis": 242, "shells": 1}
+{"event": "SPLINE_I_SHELL", "cap": 14794}
+{"event": "SPARSE_SPLINE_AFFINE", "cap": 14794, "active_rows": 638}
+{"event": "MULTICAP_BASIS_COMPONENT", "cap": 14794, "basis": 242, "shells": 1}
+{"event": "SPLINE_I_SHELL", "cap": 20521}
+{"event": "SPLINE_I_SHELL", "cap": 16384}
+{"event": "SPLINE_I_SHELL", "cap": 15521}
+{"event": "SPARSE_SPLINE_AFFINE", "cap": 20521, "active_rows": 638}
+{"event": "SPARSE_SPLINE_AFFINE", "cap": 16384, "active_rows": 638}
+{"event": "SPARSE_SPLINE_AFFINE", "cap": 15521, "active_rows": 638}
+{"event": "MULTICAP_BASIS_COMPONENT", "cap": 20521, "basis": 242, "shells": 3}
+{"event": "MULTICAP_BASIS_LAYER", "cap": 11692}
+{"event": "MULTICAP_BASIS_LAYER", "cap": 11810}
+{"event": "MULTICAP_BASIS_LAYER", "cap": 14794}
+{"event": "MULTICAP_BASIS_LAYER", "cap": 14795}
+{"event": "MULTICAP_BASIS_LAYER", "cap": 14997}
+{"event": "MULTICAP_BASIS_LAYER", "cap": 15521}
+{"event": "MULTICAP_BASIS_LAYER", "cap": 15540}
+{"event": "MULTICAP_BASIS_LAYER", "cap": 16384}
+{"event": "MULTICAP_BASIS_LAYER", "cap": 20521}
+{"event": "MULTICAP_SPLINE_RITZ", "cutoff": 1e-10, "basis": 726, "rank": 466, "quotient": 0.9997126872716795, "eigensolver_quotient": 0.9997126872716796, "lambda_hybrid": 0.010915580619479498, "fixed_vector_best_lambda": 0.01091558020600635, "normalized_gram_min": -1.7620771477781427e-08, "normalized_gram_max": 64.15474319111877, "retained_min_eigenvalue": 6.823447558780655e-09, "denominator": 1.0000000000000016, "components": {"J0": 0.992605190234206, "Jplus": 0.0072652400048957705, "KtailC": 0.009277457607122026}, "fixed_vector_zero_loss": 0.9998704302391018}
+{"event": "MULTICAP_SPLINE_RITZ", "cutoff": 1e-12, "basis": 726, "rank": 545, "quotient": 0.999712796102296, "eigensolver_quotient": 0.9997127961022895, "lambda_hybrid": 0.0109155727765797, "fixed_vector_best_lambda": 0.010915581656372166, "normalized_gram_min": -1.7620771477781427e-08, "normalized_gram_max": 64.15474319111877, "retained_min_eigenvalue": 6.442961912007546e-11, "denominator": 0.9999999999999869, "components": {"J0": 0.9926052947198432, "Jplus": 0.007265244467614294, "KtailC": 0.00927746577127244}, "fixed_vector_zero_loss": 0.9998705391874574}
+{"event": "MULTICAP_SPLINE_RITZ", "cutoff": 1e-14, "basis": 726, "rank": 604, "quotient": 2.3833742375035856, "eigensolver_quotient": 2.3835260998757533, "lambda_hybrid": 0.021665186258164878, "fixed_vector_best_lambda": 0.022370421125221505, "normalized_gram_min": -1.7620771477781427e-08, "normalized_gram_max": 64.15474319111877, "retained_min_eigenvalue": 7.291300460294819e-13, "denominator": 1.0000805985523098, "components": {"J0": 2.3833742374946865, "Jplus": 9.311179039595687e-12, "KtailC": 4.9938829610219636e-11}, "fixed_vector_zero_loss": 2.3833742375039972}
+{"event": "MULTICAP_SPLINE_COMPLETE", "seconds": 154.27359904699983, "gain": 0.0001790048740043515}
