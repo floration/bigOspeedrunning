@@ -34,3 +34,13 @@ Gaussian binds at the height cap, so the debit change doesn't matter there. With
 
 ## What's needed to make it a package
 Fork #8073's `prepare.py`/checks with LOWER 18960→4488, suffix 8→15/2, D 11204→11173, the new profile and κ, and then regenerate the hard-coded regression constants (fixture counts, reserves, cuts, seam ceilings) by running the replay.
+
+## Free improvements (2026-11-23 04:20): candidate 1b, κ = 0.003898224460300
+The checker thread confirmed this independently.
+- Suffix charge s = 186/25 (7.44), just above #8073's proved 7.43958. The optimum floor becomes L = 4474.
+- Debit on a 2^20 grid: D = 1430037/2^20 (#8073 used a 1/8192 grid).
+- Allocation: (8192, 110461, 524288; G = 511587), clock 318291991 (cap 318292011), sup 0.003898224460300156.
+- Install κ = 0.003898224460300. That is +1.20e-10 over candidate 1 and **+4.707e-9 over #8073**.
+- Other grids, for comparison: 2^14 gives 0.0038982244120, and 2^16 gives 0.0038982244476.
+- Nothing else is free. Checked: more installed digits (worth under 1e-16), the Gaussian debit grid (about 1e-15), the Gaussian bands (1874/1724 are already optimal), and 2- or 4-stage schedules (both worse).
+- Replay note from the checker: check_stage_seam.py asserts level_floor == 18960 for every ordinary recipe, and the floor also drives the physical K7 opening, so the calendar and raw replays must be re-run at the new floor.
