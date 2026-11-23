@@ -1,3 +1,5 @@
+**Author: floration**, building on the upstream work credited at the end.
+
 ## Change and mathematical scope
 
 This is a parameter construction on top of #8073: one changed charged finite factor and a re-funded literal profile, with the same signed words and the same five framework assumptions. It is a κ improvement under the #8072 clock cap, not a scalar saving: conditional **κ = 0.003898224460300**. That is `2353397/500000000000000` (+4.707e-9) above #8073's installed 0.003898219753506, and above #8073's exact fixed-booking ceiling `523210198560303585338978849681/134217728000000000000000000000000`.

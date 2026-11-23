@@ -1,3 +1,5 @@
+**Author: floration**, building on the upstream work credited at the end.
+
 ## Change and mathematical scope
 
 This is a parameter construction on top of #8080, which itself sits on #8073. One charged finite factor changes, the Gaussian booking moves to a finer grid, and the literal profile is re-funded. The signed words and the five framework assumptions are unchanged. The result is conditional **κ = 0.003898230327195**: +5.867e-9 above #8080 and +1.057e-8 above #8073, under the same #8072 clock cap 318292011.
