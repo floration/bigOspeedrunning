@@ -23,3 +23,7 @@ New upstream record #8087 (0.003898460000505, 25-bit, old word) is below our #80
 - `p104-shortcut-word-eta-25bit`, κ **0.003900826718768** (gamed). Heights (1991687, 31554614, 33554431), G = 198448, log2 C 21515894540. +1.2524e-6 over #8088, +2.3667e-6 over #8087. Official runner: all 7 scopes pass.
 - `p104-shortcut-word-eta-25bit-4stage` (checker's 4-stage idea): κ **0.003900826966095**, heights (125432, 1988432, 31439868, 33554431), G = 198527, log2 C 21518289843. +2.47e-10 over the 3-stage. Official runner: all 7 scopes pass. Checker verified both (minimal G, locally optimal heights; a 5th stage is worth <~1e-12).
 Note: build_25.py holds placeholders; the final values were edited in place in the packages.
+
+## Update (08:35 UTC): 27-bit heights, 5 ordinary stages
+`p104-shortcut-word-eta-27bit-5stage`, κ **0.003900857267786** (gamed). +3.03e-8 over #8090. Heights (31808, 502922, 7951907, 125730703, 134217727), G = 208653, log2 C 85945126846. Setup lemma extension: SETUP-27BIT.md. Official runner: all 7 scopes pass (calendar ~264 s).
+The ceiling for this line is the binary trial c_B = 0.003900867368; 28 bits gives 0.003900862317916 but its calendar takes ~522 s against the runner's 600 s cap, so it was not proposed. Builder: build_bits.py <bits> <stages> then finish_bits.sh <name>.
