@@ -17,3 +17,9 @@ Scripts: combo.py (model), lift.py (gamed allocation), build_combo.py / build_li
 
 ## Update (06:20 UTC): lifted five-shortcut word
 `p104-shortcut-word-lift-20bit`, κ **0.003899574328473** (gamed, enlarged budget). It is +1.226e-6 over #8086. The ordinary side binds at the 20-bit ceiling with heights (62186, 986008, 1048575) and G = 66037. The official runner passes all 7 scopes.
+
+## Update (07:05 UTC): 25-bit + η = 1/256 on the shortcut word
+New upstream record #8087 (0.003898460000505, 25-bit, old word) is below our #8088. Stacking #8081/#8087's 25-bit setup and #8084's η = 1/256 (q < η < 1/250) on the #8088 package:
+- `p104-shortcut-word-eta-25bit`, κ **0.003900826718768** (gamed). Heights (1991687, 31554614, 33554431), G = 198448, log2 C 21515894540. +1.2524e-6 over #8088, +2.3667e-6 over #8087. Official runner: all 7 scopes pass.
+- `p104-shortcut-word-eta-25bit-4stage` (checker's 4-stage idea): κ **0.003900826966095**, heights (125432, 1988432, 31439868, 33554431), G = 198527, log2 C 21518289843. +2.47e-10 over the 3-stage. Price and calendar pass; full replay pending at time of writing.
+Note: build_25.py holds placeholders; the final values were edited in place in the packages.
