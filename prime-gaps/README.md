@@ -75,3 +75,33 @@ The 180 paper's certification is much larger than this repo's scripts.
 - `pair_exclusion_tuples.c`: fewest pairs more than G apart (an upper bound on the minimum; the "no single-pair 178 tuple" claim was proved by the exact variant).
 - `mk_p1p2.py`, `mk_signatures.py`: exact M_k lower bounds.
 - `earlier-findings.md`: earlier notes on the 182 entry (margin 6.5 × 10⁻⁵, five-idea attempt).
+
+## Quick surrogate re-optimization for the 176 tuple (2026-11-23)
+
+The 180 release omits its optimizer (`fast_fragment_ritz`, `incidence_multicap_spline_ritz` are imported but not shipped), so this is a
+**surrogate**, not their criterion. `mk_pair_cost.py k radial sig` computes, at the M_k-optimal symmetric weight, the single-prime form
+k·J/I and the pair (double-erasure) form D/I exactly:
+
+| k=39 | M | J/I | D/I |
+|---|---|---|---|
+| sig ≤ 6 | 3.588988 | 0.0920253 | 0.0083909 |
+| sig ≤ 8 | 3.640829 | 0.0933546 | 0.0086165 |
+
+Calibration to the 180 paper: single-prime total S = (37·2597671 + 2·1452218)/98747690, pair cost P = 151252/98747690 and
+losses L = 0.001121271547 + 0.0000443013. Then S scales with M, P with D/I, and L is held fixed. With these numbers the paper's own
+setup gives a margin of +4.3e-5 (the paper reports 1.03e-6 after its grid transfer).
+
+| shifts | gap | pairs excluded | sig ≤ 6 | sig ≤ 8 |
+|---|---|---|---|---|
+| 39 | 180 | 1 | +0.00004 | +0.0145 |
+| **39** | **176** | **2** | **−0.0015** | **+0.0129** |
+| 39 | 174 | 4 | −0.0046 | +0.0098 |
+| 38 | 176 | 0 | | +0.0110 |
+| 38 | 170 | 2 | | +0.0079 |
+| 38 | 166 | 5 | | +0.0031 |
+
+**Read with care.** The surrogate says 176 passes with ~10⁴× the 180 paper's margin. But it also says 166 passes, and that is a red flag.
+It assumes the plain-simplex gain from degree-8 signatures carries over unchanged to their restricted weight. The restriction loss R, the
+Harman minorant prices and the Type III ranges all depend on the weight's shape, and they are the likeliest reason the 182 and 180 authors
+stopped at degree 6. This is evidence that degree-8 signatures are worth testing in the real criterion, not a bound. Nothing here should be
+posted as a Claimed 176.
