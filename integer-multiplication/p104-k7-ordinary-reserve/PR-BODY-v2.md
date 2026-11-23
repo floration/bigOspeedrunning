@@ -26,7 +26,7 @@ What the replay does not check: the reserve argument is a reading of #8042's wri
 
 ## Credit
 
-Contributed by **floration** (author of this package), in collaboration with the upstream authors credited below, and building on their work.
+**Main author: floration.** This is a collaboration that builds on the upstream work credited below.
 
 This builds on #8080 (floration, with Claude) and #8073 (Campaign contributor, with OpenAI Codex), and through them on Ali Romman's #8042, #8055 and #8057, SYLforge's #8052, and #8059 to #8072. Source licenses are retained. floration did the analysis, implementation and replay, with material assistance from Claude (Anthropic).
 

@@ -28,7 +28,7 @@ This prints `PASS_REGISTERED_RESEARCH_PACKAGE research/p104-k7-floor-retune outc
 
 ## Credit
 
-Contributed by **floration** (author of this package), in collaboration with the upstream authors credited below, and building on their work.
+**Main author: floration.** This is a collaboration that builds on the upstream work credited below.
 
 This builds directly on #8073 (Campaign contributor, with OpenAI Codex), and through it on:
 - Ali Romman's #8042 suffix argument, #8057 signed producer and caller, and #8055 setup proof;
