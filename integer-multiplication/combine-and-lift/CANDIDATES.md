@@ -14,3 +14,6 @@ Scripts: combo.py (model), lift.py (gamed allocation), build_combo.py / build_li
 ## Update (05:40 UTC): full stack with #8082's reserve drop
 - As intended (under the cap): the stack gives exactly #8082's κ 0.003898230327195. The Gaussian side binds at G = 2^19, the top of #8073's stated domain, so the tariff only frees clock (minimal h2 falls 101729 → 89635). No new package.
 - Gamed: `p104-stack-height-lift-20bit`, κ **0.003898348449639** (+8.450e-9 over #8078, +7.96e-13 over p104-height-lift-20bit). Official runner: all 7 scopes pass.
+
+## Update (06:20 UTC): lifted five-shortcut word
+`p104-shortcut-word-lift-20bit`, κ **0.003899574328473** (gamed, enlarged budget). It is +1.226e-6 over #8086. The ordinary side binds at the 20-bit ceiling with heights (62186, 986008, 1048575) and G = 66037. The official runner passes all 7 scopes.

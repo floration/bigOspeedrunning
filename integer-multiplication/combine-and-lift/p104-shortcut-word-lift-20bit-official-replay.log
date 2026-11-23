@@ -1,0 +1,174 @@
+CHECK Check the (186/25)/L directed K7 suffix envelope at the retuned floor 4474, adjacent and prior-envelope booking controls, unchanged Gaussian factor, signed placement and complete invoice.
+PASS_WEIGHTED_COMPLETE_PRICE 685495960
+ORDINARY_RESERVE 1.3581206042808134e-06 3.3267701604892585e-07 0.0227193413440062
+PASS_DIRECTED_ORDINARY_DEBIT 4474 1420718/1048576 2400/2401 (186/25)/L, no 256/255
+PASS_CHILD_TARIFF 2401/1024 volume<=75/32 sum=2401 entry+5 terminal+9
+PASS_INDEPENDENT_WEIGHTED_AND_QUARTER_PRICES
+[
+  {
+    "H": 1024,
+    "cell": [
+      1,
+      112,
+      1,
+      258
+    ],
+    "share": "1/624",
+    "rotated_roots": 384,
+    "first_root": [
+      "root",
+      "rotated",
+      0,
+      4080,
+      1
+    ],
+    "period": 1364,
+    "tickets": [
+      0,
+      272,
+      545
+    ],
+    "first_swap": [
+      1,
+      272,
+      1
+    ]
+  },
+  {
+    "H": 66037,
+    "cell": [
+      1,
+      112,
+      1,
+      258
+    ],
+    "share": "1/624",
+    "rotated_roots": 384,
+    "first_root": [
+      "root",
+      "rotated",
+      0,
+      4080,
+      1
+    ],
+    "period": 1364,
+    "tickets": [
+      0,
+      272,
+      545
+    ],
+    "first_swap": [
+      1,
+      272,
+      1
+    ]
+  }
+]
+PASS_SHORTCUT_WORD_LIFT_20BIT price
+CHECK Check the actual K7 matched-interval census and all-size error envelope, previous and adjacent profiles, exact capped crossing, seams and signed restoration.
+PASS_TWO_NATIVE_TYPES 2048 1040 2 (13600, 26400) 951040 (4684, 22252) 37152 {(0, 1), (1, 0), (1, 1)}
+[
+  {
+    "frequency": [
+      1,
+      3
+    ],
+    "raw_frames": 7620,
+    "directed_bindings": {
+      "(1, 1)": 2688,
+      "(1, 0)": 420,
+      "(0, 1)": 704
+    },
+    "depth": 3,
+    "peak_simultaneous_frames": 4484,
+    "external_opens": 192,
+    "zeros": 9232,
+    "external_rows": 1152,
+    "positive_periods": [
+      16
+    ],
+    "leaf_axes": 377008,
+    "same_tick_return_before_next_loan": 3392
+  },
+  {
+    "frequency": [
+      1,
+      90
+    ],
+    "raw_frames": 25120,
+    "directed_bindings": {
+      "(1, 1)": 12320,
+      "(1, 0)": 12,
+      "(0, 1)": 24
+    },
+    "depth": 3,
+    "peak_simultaneous_frames": 16848,
+    "external_opens": 14912,
+    "zeros": 22628,
+    "external_rows": 39040,
+    "positive_periods": [
+      8,
+      12,
+      16
+    ],
+    "leaf_axes": 862608,
+    "same_tick_return_before_next_loan": 12344
+  },
+  {
+    "frequency": [
+      5,
+      451
+    ],
+    "raw_frames": 25152,
+    "directed_bindings": {
+      "(1, 1)": 12384,
+      "(1, 0)": 12,
+      "(0, 1)": 24
+    },
+    "depth": 3,
+    "peak_simultaneous_frames": 16868,
+    "external_opens": 15104,
+    "zeros": 22436,
+    "external_rows": 39552,
+    "positive_periods": [
+      8,
+      12,
+      16
+    ],
+    "leaf_axes": 862544,
+    "same_tick_return_before_next_loan": 12408
+  }
+]
+PASS_LITERAL_UPPER_FENCE 1724 1874 (1024, 66037)
+PASS_LITERAL_LOWER_CUTOFF 1874 (1866, 3732) [(0, 0, 3748, 4), (0, 1, 3748, 390), (0, 0, 3750, 4), (0, 1, 3750, 389), (1, 0, 3748, 390), (1, 1, 3748, 35188), (1, 0, 3750, 389), (1, 1, 3750, 35151)] 523336523682
+PASS_HEIGHT_LIFT_20BIT_PROFILE {"binary_cuts": [62500, 1048572, 2097211], "compiled_stage_seams": [{"component_log": 34632, "direct": false, "predecessor_cut": 62500, "rank_log": 986008, "scanned_log": 8880000, "stage": 2}, {"component_log": 36816, "direct": false, "predecessor_cut": 1048572, "rank_log": 1048575, "scanned_log": 9440000, "stage": 3}], "complete_log2_C": 685495960, "controls": ["second-ordinary-height-minus-one", "third-ordinary-height-minus-one", "capped-combined-profile-at-new-rate", "gaussian-height-minus-one", "inherited-cap-318292011", "outer-ordinary-margin-removed", "prefix-height-at-previous-cut", "recurring-bound-minus-one"], "conversion_bits": 973, "direct_stage_seams": [{"component_log": 4095, "direct": true, "predecessor_cut": 62500, "rank_log": 986008, "scanned_log": 1050000, "stage": 2}, {"component_log": 8190, "direct": true, "predecessor_cut": 1048572, "rank_log": 1048575, "scanned_log": 2100000, "stage": 3}], "gaussian_height": 66037, "heights": [62186, 986008, 1048575], "kappa": "3899574328473/1000000000000000", "log2_B": 670966217, "signed": {"functional": 4, "ordinary_margin": "1/1000000000000000000", "positive_margin": "33069152611014851/27697925324800000000000000000", "smallest_margin": "1/10000000000000000000", "strict": 54}, "signed_tape": [{"component_width": 1, "modulus": 3, "paid_exchanges": 3, "records": 81, "wrong_signed_return_rejected": true}, {"component_width": 2, "modulus": 9, "paid_exchanges": 1, "records": 6561, "wrong_signed_return_rejected": true}], "stock": {"absolute_log2_private_control_envelope": 1073740803, "binary_cuts": [62500, 1048572, 2097211], "first_public_offset": 4, "initial_s": 2163504, "public_exponent_A": 2163503, "retimed_all_size_margin_floor": 1045976, "retimed_first_stripe_margin": 1079694, "stage_and_outer_fixed_log_overhead": 1968, "storage_upper": "6.2 p T < 297.6 n bits"}}
+PASS_LITERAL_ORDINARY_FLOOR {"binary_all_size": {"birth_bound": "2V", "copy_group_bound": "3N^3", "first_two_columns": [4466, 4468], "fringe_upper_1e9": 7439580927, "grid_absolute_error_exponent_at_H1024": -27312, "minimum_positive_scale_h_guard": 1024, "normalized_error_allowance": "2^-128", "psi_lower_floor": 386067, "suffix_birth_error_upper_at_H1024": "2^30/N^5", "suffix_target_axes": 286098, "whole_field_width": "N^92"}, "binary_integer_fixture": {"carrier": 2097152, "extent": "complete fixture event stream", "first_band_contacts": [[4474, 29, [[0, 0, 5842, 1], [0, 1, 5842, 1], [0, 0, 5844, 8], [0, 1, 5844, 8], [1, 0, 5842, 1], [1, 1, 5842, 1], [1, 0, 5844, 8], [1, 1, 5844, 8]]], [4476, 29, [[0, 0, 5846, 7], [0, 1, 5846, 7], [0, 0, 5848, 3], [0, 1, 5848, 3], [1, 0, 5846, 7], [1, 1, 5846, 7], [1, 0, 5848, 3], [1, 1, 5848, 3]]]], "lower": 4474, "lower_return_counts": {"4466": 108, "4468": 120}, "native_closes": 76380, "native_opens": 76380, "paid_singletons": 38003660528, "returned_paid_prefixes": 456, "tested_occupied_K7_grade": [49, 64], "upper": 5854}, "new_binary_openings": [{"ambient": 134, "first_columns": 4466, "height": 3000, "lower": 4474, "plan_arguments_checked": true}, {"ambient": 134, "first_columns": 4466, "height": 3080, "lower": 4474, "plan_arguments_checked": true}, {"ambient": 134, "first_columns": 4466, "height": 62186, "lower": 4474, "plan_arguments_checked": true}, {"ambient": 134, "first_columns": 4466, "height": 986008, "lower": 4474, "plan_arguments_checked": true}, {"ambient": 134, "first_columns": 4466, "height": 1048575, "lower": 4474, "plan_arguments_checked": true}]}
+PASS_SHORTCUT_WORD_LIFT_20BIT calendar
+CHECK Execute both nonzero signed native jobs and restore all physical owners.
+PASS_TYPED_RAW48 0 columns 2 paid 282336 nonzero 16 writes 71808 peak 62448
+PASS_TYPED_RAW48 1 columns 4 paid 281328 nonzero 15 writes 71808 peak 62448
+PASS_SHORTCUT_WORD_LIFT_20BIT raw
+CHECK Generate the first exterior births and return all owners through the actual signed words.
+PASS_EXTERIOR_TYPED_RAW (23676078769318, 2135582304992420) 73 105216 563664 [4456224, 234] [0, 121427]
+PASS_SHORTCUT_WORD_LIFT_20BIT exterior
+CHECK Carry the actual nonzero cross-type nested loan and verify both owner returns.
+real nested transfer completed 3418 ('helper', 9977, 0, 14) [281328, 2]
+PASS_NONZERO_INTERIOR 282336 281328 9841 4507817377 2 [0, 118692]
+PASS_SHORTCUT_WORD_LIFT_20BIT nested
+CHECK Execute the exact signed product and independently verify coefficients and restoration.
+{"H_calls": 157248, "bits": [20, 19], "coefficients_prefix": [11811, 10996, 4152, 868, 77], "padded_bytes": 633744, "product": "-345550037539", "rank": 2, "seconds": 40.174, "shuttles": 138, "stage_body_records": 6561}
+PASS_WEIGHTED_SIGNED_PRODUCT
+PASS_SHORTCUT_WORD_LIFT_20BIT product
+CHECK Check canonical serial division, Bézout, rational arithmetic and the conservative fixed native setup tape bound.
+{
+  "integer_pairs": 4071,
+  "rational_cases": 7396,
+  "max_datum_bits": 274877906944,
+  "lookup": 170141183460469231731687303715884105728,
+  "local_arithmetic": 297105609434291902295870930944,
+  "all_setup": 217364570380528137475793294892811967875864032914108887556978854854656,
+  "setup_exponent": 228
+}
+PASS_SHORTCUT_WORD_LIFT_20BIT setup
+PASS_REGISTERED_RESEARCH_PACKAGE research/p104-shortcut-word-lift-20bit outcome=completed
+EXIT 0
