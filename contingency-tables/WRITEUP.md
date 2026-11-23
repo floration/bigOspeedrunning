@@ -1,6 +1,6 @@
 # Contingency tables
 
-**By:** floration (q), in collaboration with the upstream authors credited below.
+**By:** floration. Builds on the upstream work credited below.
 
 **Our value:** 11,232·d^17
 **Listed record:** 80,000·d^17 (EcoDataLab)
@@ -13,4 +13,4 @@ Tightens EcoDataLab's quarter-envelope argument with a sharp log-2 padding thres
 The Lean proof compiles against EcoDataLab/contingency-tables @ d851f00 (see README.md and the .lean files here).
 
 ## Credit
-**floration (q)**, in collaboration with the upstream authors: EcoDataLab, for the original argument and Lean development. This folder builds directly on their work. Full repository: https://github.com/floration/bigOspeedrunning
+**Main author: floration.** Builds on: EcoDataLab, for the original argument and Lean development. This folder builds directly on their work. Full repository: https://github.com/floration/bigOspeedrunning
