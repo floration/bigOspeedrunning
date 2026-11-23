@@ -1,5 +1,7 @@
 # Simple zeros on the critical line
 
+**By:** floration (q), in collaboration with the upstream authors credited below.
+
 **Our value:** κ* ≥ 0.6734097 = (100000/98959)(H(3/2) − 29997/5000000)
 **Listed record:** 0.6731134 (Bhattacharjee–Bhattacharya)
 **Status:** Claimed.
@@ -11,4 +13,4 @@ Keeps their defect argument (creelie/mh-phys 1.3.0) and replaces the Montgomery�
 Alpöge–Furman's unchanged verifier certifies the 11-zero window inequality. The argument itself is unrefereed.
 
 ## Credit
-Bhattacharjee and Bhattacharya for the argument, and Alpöge and Furman for the verifier. This folder builds directly on their work. Full repository: https://github.com/floration/bigOspeedrunning
+**floration (q)**, in collaboration with the upstream authors: Bhattacharjee and Bhattacharya for the argument, and Alpöge and Furman for the verifier. This folder builds directly on their work. Full repository: https://github.com/floration/bigOspeedrunning

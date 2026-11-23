@@ -1,5 +1,7 @@
 # Subset Sum
 
+**By:** floration (q), in collaboration with the upstream authors credited below.
+
 **Our value:** α = 0.4875739537
 **Listed record:** 0.4875755 (Jennifer Voitle)
 **Status:** Claimed.
@@ -11,4 +13,4 @@ Tightens the slack constants in Voitle's proof. This is a paper proof, not Lean.
 certify_final.py checks the constants, and candidate_final.json holds them.
 
 ## Credit
-Jennifer Voitle, for the proof. This folder builds directly on their work. Full repository: https://github.com/floration/bigOspeedrunning
+**floration (q)**, in collaboration with the upstream authors: Jennifer Voitle, for the proof. This folder builds directly on their work. Full repository: https://github.com/floration/bigOspeedrunning

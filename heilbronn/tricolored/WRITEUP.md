@@ -1,5 +1,7 @@
 # Heilbronn triangle problem
 
+**By:** floration (q), in collaboration with the upstream authors credited below.
+
 **Our value:** η = 1/30,650,782 ≈ 3.2626e-8
 **Listed record:** ≈1.96e-8 (Ivan Blinov)
 **Status:** Claimed.
@@ -11,4 +13,4 @@ Uses Blinov's PR #13 reserved-tag scheme with the manuscript's tag span of 10, a
 Running verify_tricolored.py packing_L10.txt reports 0 violations.
 
 ## Credit
-Ivan Blinov, for the scheme and the manuscript. This folder builds directly on their work. Full repository: https://github.com/floration/bigOspeedrunning
+**floration (q)**, in collaboration with the upstream authors: Ivan Blinov, for the scheme and the manuscript. This folder builds directly on their work. Full repository: https://github.com/floration/bigOspeedrunning

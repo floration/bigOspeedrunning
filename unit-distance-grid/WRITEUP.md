@@ -1,5 +1,7 @@
 # Unit-distance final grid
 
+**By:** floration (q), in collaboration with the upstream authors credited below.
+
 **Our value:** Nj ≤ 30
 **Listed record:** 32 (Rohan Arun)
 **Status:** Claimed.
@@ -11,4 +13,4 @@ Completes the full 6×5 grid (proof_6x5.md). It is conditional on the same OpenA
 check_grid.py checks the grid.
 
 ## Credit
-Rohan Arun, and the OpenAI lemmas the record relies on. This folder builds directly on their work. Full repository: https://github.com/floration/bigOspeedrunning
+**floration (q)**, in collaboration with the upstream authors: Rohan Arun, and the OpenAI lemmas the record relies on. This folder builds directly on their work. Full repository: https://github.com/floration/bigOspeedrunning

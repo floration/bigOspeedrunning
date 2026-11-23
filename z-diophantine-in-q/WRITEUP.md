@@ -1,5 +1,7 @@
 # ℤ is Diophantine in ℚ
 
+**By:** floration (q), in collaboration with the upstream authors credited below.
+
 **Our value:** 179 variables, degree 4, 2,841 terms
 **Listed record:** 257 (an explicit 179 is already public from Jose Brox)
 **Status:** Claimed.
@@ -11,4 +13,4 @@ This is only a re-encoding of Brox's 179-variable system with the same rational 
 verify_gamed.py is an exact checker for gamed179.json.
 
 ## Credit
-Jose Brox, Conant and the ℤ-in-ℚ project. The mathematics is theirs. This folder builds directly on their work. Full repository: https://github.com/floration/bigOspeedrunning
+**floration (q)**, in collaboration with the upstream authors: Jose Brox, Conant and the ℤ-in-ℚ project. The mathematics is theirs. This folder builds directly on their work. Full repository: https://github.com/floration/bigOspeedrunning
