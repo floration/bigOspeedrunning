@@ -19,4 +19,6 @@ This note extends the 25-bit fixed-installer lemma of [#8081](https://github.com
 
 The added work therefore still fits in #8081's separate `2^40` allowance. With `n = 2^68 + 2^40` and the same `w`, `h`, `S`, `L` and `E`, the transition bound `(n+1)(L+E+2^120)2^32 < 2^228` is unchanged. `prepare.py` asserts each of these inequalities in the installed receipt.
 
+**Cuts and entrance logs.** The stage cuts `(32000, 534986, 8486957, 134217724, 268435515)` exceed `2^27`, and the last one exceeds `2^28`. They are exponents that `entrance_logs` and `activation` compute and use as unbounded Python integers. Like #8081's, this lemma bounds only the height records that the fixed constructor stores. The same was already true at 25 bits: #8090's last cut, 67108923, exceeds `2^26`. No fixed-width descriptor in the installed source stores a cut. The old `bit_length() ≤ 20` assertion examined heights only, and this package replaces it with the height check above.
+
 **What is not covered.** This note does not re-run #8081's `verify_setup.py` finite falsification at these exact bytes. A height of 2^27 or more needs a fresh bound.
